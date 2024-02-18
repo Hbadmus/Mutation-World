@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: 16bf7bd0908038a4897071192758349d
+  productGUID: a43c20fff5d86214696b89b162c9d65b
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: Mutation World
+  productName: Prototype
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -674,14 +674,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Mutation World
+  metroPackageName: Prototype
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Mutation World
+  metroApplicationDescription: Prototype
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -750,11 +750,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 25e65509-d3d1-46c3-9525-2e32eb3b018e
+  cloudProjectId: f48461cb-69d9-48c5-9250-e6a0faec6a44
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Mutation World 2024-02-17_16-17-38
-  organizationId: hbadmus
+  projectName: Prototype
+  organizationId: anthonyadade
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
