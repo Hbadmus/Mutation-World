@@ -7,8 +7,9 @@ public class EnemyBehavior : MonoBehaviour
 {
     public Transform player;
     public float minDistance = 10;
-    public int damageAount = 20;
+    public int damageAmt = 20;
     Animator animator;
+
 
     void Start()
     {
@@ -25,8 +26,14 @@ public class EnemyBehavior : MonoBehaviour
 
         transform.LookAt(player);
 
+
+
         animator.SetBool("attackPlayer", distance < minDistance);
         animator.SetBool("movementAnimationTrigger", distance > minDistance);
         
+        if (animator.GetBool("attackPlayer")) {
+        var playerHealth = player.GetComponent<PlayerHealth>();
+        playerHealth.TakeDamage(damageAmt);
+        }
     }
 }
