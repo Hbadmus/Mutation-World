@@ -19,7 +19,7 @@ public class ShootWeapon : MonoBehaviour
     void Update()
     {
         if(Input.GetButtonDown("Fire1")) {
-            GameObject projectile = Instantiate(ammoPrefab, transform.position + transform.up +
+            GameObject projectile = Instantiate(ammoPrefab, transform.position +
             transform.forward, transform.rotation) as GameObject;
 
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
