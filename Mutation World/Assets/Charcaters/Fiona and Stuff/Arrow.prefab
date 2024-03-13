@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3821642546469141450}
   - component: {fileID: 411658126159461881}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Arrow
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,9 +31,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 6.8, y: 6.63, z: 73.85}
-  m_LocalScale: {x: 0.09, y: 0.1, z: 0.09}
+  m_LocalScale: {x: 0.045475904, y: 0.0100413365, z: 0.047890782}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4674673270801015907}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &7710691390966247498
@@ -64,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 43ee5ab6b32b52f4e86b8c4c90674484, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -121,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eab036eb0885ca4385b871fdb5e1dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destoryTime: 3
+  destoryTime: 2
 --- !u!54 &411658126159461881
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -130,7 +131,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555576899683477725}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 6
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -144,8 +145,86 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!1001 &4674673270801153761
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2552107619668724387}
+    m_Modifications:
+    - target: {fileID: 100002, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+      propertyPath: m_Name
+      value: Elven Long Bow Arrow (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+      propertyPath: m_TagString
+      value: Projectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 11.104569
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10.0024805
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 11.114498
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -96.62172
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -11.333346
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.99957937
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.02900074
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.00000016856937
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+--- !u!4 &4674673270801015907 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400002, guid: 432dd2b7c2581c744a40ca43b1307c17, type: 3}
+  m_PrefabInstance: {fileID: 4674673270801153761}
+  m_PrefabAsset: {fileID: 0}
