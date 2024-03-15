@@ -23,6 +23,10 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void TakeDamage(int dam) {
+        if (gameObject.name == "Jack")
+        {
+            dam /= 2;
+        }
         if(currentHealth > 0) {
             currentHealth -= dam;
             healthSlider.value = currentHealth;

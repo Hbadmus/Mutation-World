@@ -13,17 +13,44 @@ public class ShootWeapon : MonoBehaviour
     Rigidbody rb;
 
     Color originalColor;
+
+    int bulletcounter = 0; // Limit firing to only 1 bullet every 5 fixed frames as Jack
+
     // Start is called before the first frame update
     void Start()
     {
-
+        if (GameObject.FindGameObjectWithTag("Player").name == "Jack")
+        {
+            speed *= 10;
+        }
     }
 
     // Update is called once per frame
 
-void Update()
-{
-    if (Input.GetButtonDown("Fire1"))
+    void Update()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Fire();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (GameObject.FindGameObjectWithTag("Player").name == "Jack")
+        {
+            if (Input.GetButton("Fire1"))
+            {
+                if (bulletcounter % 5 == 0)
+                {
+                    Fire();
+                }
+            }
+            bulletcounter++;
+        }
+    }
+
+    private void Fire()
     {
         if (CharacterAbilites.isStormOfArrowsActive)
         {
@@ -44,14 +71,17 @@ void Update()
                 CharacterAbilites.isStormOfArrowsActive = false;
             }
         }
-            projectile = Instantiate(ammoPrefab, transform.position +
-            transform.forward, transform.rotation) as GameObject;
+        
+        // Making sure projectile goes straight.
+        Quaternion bulletOrientation = transform.rotation * Quaternion.Euler(90, 13, 0);
 
-            rb = projectile.GetComponent<Rigidbody>();
+        projectile = Instantiate(ammoPrefab, transform.position +
+        transform.forward, bulletOrientation) as GameObject;
 
-            rb.AddForce(transform.forward * speed, ForceMode.VelocityChange);
+        rb = projectile.GetComponent<Rigidbody>();
 
-            projectile.transform.SetParent(GameObject.FindGameObjectWithTag("AmmoTrash").transform);
-        }
+        rb.AddForce(transform.forward * speed, ForceMode.VelocityChange);
+
+        projectile.transform.SetParent(GameObject.FindGameObjectWithTag("AmmoTrash").transform);
     }
 }

@@ -812,11 +812,11 @@ GameObject:
   - component: {fileID: 8797958022291592701}
   m_Layer: 0
   m_Name: Zombie3
-  m_TagString: Untagged
+  m_TagString: Mob
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8429865231615740692
 Transform:
   m_ObjectHideFlags: 0

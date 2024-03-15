@@ -1530,7 +1530,7 @@ GameObject:
   - component: {fileID: 1263656914789149153}
   m_Layer: 6
   m_Name: Zombie3
-  m_TagString: Untagged
+  m_TagString: Mob
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1543,7 +1543,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6015841573776447025}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9984715, z: -0, w: 0.055269342}
+  m_LocalRotation: {x: 0, y: 0.9984713, z: 0, w: 0.055272646}
   m_LocalPosition: {x: 45.845177, y: -13.638049, z: 115.80305}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
