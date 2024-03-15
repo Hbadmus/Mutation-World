@@ -51,6 +51,12 @@ public class PlayerHealth : MonoBehaviour
     void PlayerDies() {
 
         transform.Rotate(-90, 0, 0, Space.Self);
+        var rb = GetComponent<Rigidbody>();
+        if(rb != null) {
+            rb.isKinematic = true; 
+            rb.detectCollisions = false; // Stops the Rigidbody from detecting collisions
+        }
         Debug.Log("You died");
+        LevelManager.instance.PlayerDied();
     }
 }

@@ -9,7 +9,7 @@ public class Breakable : MonoBehaviour
     public float explosionRadius = 10f;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Mob"))
+        if (other.gameObject.CompareTag("Mob") || other.gameObject.CompareTag("Enemy"))
         {
         Debug.Log("hello");
         Transform currentCrate = gameObject.transform;
