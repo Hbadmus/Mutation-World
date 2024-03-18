@@ -72,6 +72,12 @@ public class LevelManager : MonoBehaviour
         {
             enemy.SetActive(false);
         }
+
+        GameObject[] bosses = GameObject.FindGameObjectsWithTag("Boss");
+        foreach (GameObject boss in bosses)
+        {
+            boss.SetActive(false);
+        }
     }
 
     // Use this method to restart the game or load another scene

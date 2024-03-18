@@ -8,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
     public int startHealth = 200;
     public Slider healthSlider;
     public int currentHealth;
+    private bool isAceDamageReductionActive = false;
+    private float aceDamageReductionDuration = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +21,15 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (gameObject.name == "Ace" && Input.GetKeyDown(KeyCode.Q)) {
+            StartCoroutine(AceDamageReductionMode());
+        }
+    }
+
+    IEnumerator AceDamageReductionMode() {
+        isAceDamageReductionActive = true;
+        yield return new WaitForSeconds(aceDamageReductionDuration);
+        isAceDamageReductionActive = false;
     }
 
     public void TakeDamage(int dam) {
@@ -27,6 +37,11 @@ public class PlayerHealth : MonoBehaviour
         {
             dam /= 2;
         }
+
+        if (gameObject.name == "Ace" && isAceDamageReductionActive) {
+            dam /= 2; 
+        }
+
         if(currentHealth > 0) {
             currentHealth -= dam;
             healthSlider.value = currentHealth;

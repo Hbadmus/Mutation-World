@@ -9,6 +9,8 @@ public int startHealth = 100;
     public AudioClip deathSFX;
     public Slider healthSlider;
     public int currentHealth;
+    public GameObject pickupPrefab; 
+    public float dropRate = 0.7f;
 
      void Awake() {
     healthSlider.GetComponentInChildren<Slider>();
@@ -38,6 +40,11 @@ if (healthSlider.value <= 0) {
             healthSlider.value = currentHealth;
         }
 
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+
         Debug.Log("Current Health: " + healthSlider.value);
     }
 
@@ -45,6 +52,20 @@ if (healthSlider.value <= 0) {
         if(currentHealth < 100) {
             currentHealth += healing;
             
+        }
+    }
+
+    private void Die()
+    {
+        DropPickup();
+        Destroy(gameObject);
+    }
+
+    private void DropPickup()
+    {
+        if (pickupPrefab != null && Random.value < dropRate)
+        {
+            Instantiate(pickupPrefab, transform.position, Quaternion.identity);
         }
     }
 

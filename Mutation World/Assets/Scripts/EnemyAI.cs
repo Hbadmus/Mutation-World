@@ -80,6 +80,10 @@ public class EnemyAI : MonoBehaviour
         elapsedTime += Time.deltaTime;
 
         if(health <= 0) {
+            if(gameObject.CompareTag("Boss"))
+            {
+                LevelManager.instance.PlayerWon();
+            }
             currentState = FSMStates.Dead;
         }
     }
