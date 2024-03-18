@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour
     public AudioClip lose;
     public AudioClip win;
     public bool isGameOver;
+    public float timer = 0;
+
 
     private void Awake()
     {
@@ -29,6 +31,16 @@ public class LevelManager : MonoBehaviour
         winUI.SetActive(false);
         lossUI.SetActive(false);
         isGameOver = false;
+        
+    }
+
+    void Update()
+    {
+        if(!isGameOver) {
+        timer += Time.deltaTime;
+        }
+
+
     }
 
     public void PlayerDied()

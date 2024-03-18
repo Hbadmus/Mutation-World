@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int startHealth = 100;
+    public int startHealth = 200;
     public Slider healthSlider;
     public int currentHealth;
 
@@ -38,6 +38,18 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Current Health: " + currentHealth);
     }
 
+        public void TakeBossDamage(int dam) {
+        if(currentHealth > 0) {
+            currentHealth -= dam;
+            healthSlider.value = currentHealth;
+        }
+
+        if(currentHealth <= 0) {
+            PlayerDies();
+        }
+        Debug.Log("Current Health: " + currentHealth);
+    }
+
     public void HealDamage(int healing) {
      if(currentHealth < 100) {
          currentHealth += healing;
@@ -58,5 +70,14 @@ public class PlayerHealth : MonoBehaviour
         }
         Debug.Log("You died");
         LevelManager.instance.PlayerDied();
+    }
+
+        void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Throwable"))
+        {
+            
+            TakeBossDamage(10);
+        }
     }
 }

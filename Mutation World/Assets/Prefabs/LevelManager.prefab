@@ -49,3 +49,6 @@ MonoBehaviour:
   lose: {fileID: 8300000, guid: 273518e97d8c42c46aeeb55e46af1a05, type: 3}
   win: {fileID: 8300000, guid: 68c0a24a087ab19429e71bd26cb75f00, type: 3}
   isGameOver: 0
+  timer: 115
+  bossSpawnTime: 5
+  boss: {fileID: 0}
