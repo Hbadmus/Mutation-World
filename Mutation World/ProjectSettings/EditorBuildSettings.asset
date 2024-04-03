@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Lvl1-Zombies-Jack.unity
+    guid: fc499874d8c177f46913206b6200623f
+  - enabled: 1
+    path: Assets/Scenes/Lvl1-Zombies-Fiona.unity
+    guid: 1da29803bddbd604aaa9a6a259c92bc1
+  - enabled: 1
     path: Assets/Scenes/CharacterSelection.unity
     guid: 851c93c4217e1504a8e01e70a900e666
   - enabled: 1
-    path: Assets/Scenes/Lvl1-Zombies.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/Lvl1-Zombies-Ace.unity
+    guid: 29b2a237dc8de424dbf7b1b0bf4b514d
   m_configObjects: {}

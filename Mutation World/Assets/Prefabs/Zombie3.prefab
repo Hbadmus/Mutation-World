@@ -1957,10 +1957,13 @@ MonoBehaviour:
   currentState: 0
   Attackdistance: 8
   ChaseDis: 50
+  throwable: {fileID: 0}
+  spawnpoint: {fileID: 0}
   player: {fileID: 0}
   damRate: 2
   damAmt: 10
-  deadVFX: {fileID: 5689029894739648777, guid: 3e6d2d42b248efd4e945576cd15242f3, type: 3}
+  damBossAmt: 10
+  timer: 1
 --- !u!114 &8202865088643014638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1974,9 +1977,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHealth: 50
+  damageTaken: 10
   deathSFX: {fileID: 0}
   healthSlider: {fileID: 2323842391337707252}
   currentHealth: 50
+  pickupPrefab: {fileID: 0}
+  dropRate: 0.1
 --- !u!1 &6129776988946820250
 GameObject:
   m_ObjectHideFlags: 0

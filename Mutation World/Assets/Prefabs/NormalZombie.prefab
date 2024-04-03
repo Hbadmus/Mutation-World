@@ -711,7 +711,6 @@ MonoBehaviour:
   damRate: 2
   damAmt: 5
   damBossAmt: 10
-  deadVFX: {fileID: 5689029894739648777, guid: 3e6d2d42b248efd4e945576cd15242f3, type: 3}
   timer: 1
 --- !u!114 &2561956216354458723
 MonoBehaviour:
@@ -726,9 +725,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHealth: 20
+  damageTaken: 10
   deathSFX: {fileID: 0}
   healthSlider: {fileID: 4028050866322963595}
   currentHealth: 20
+  pickupPrefab: {fileID: 7282382296041279821, guid: 7e2add688113470449cf433477661599, type: 3}
+  dropRate: 0.1
 --- !u!1 &2363823085411086022
 GameObject:
   m_ObjectHideFlags: 0

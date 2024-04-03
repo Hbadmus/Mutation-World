@@ -7,11 +7,11 @@ public class Breakable : MonoBehaviour
     public GameObject cratePieces;
     public float explosionForce = 250;
     public float explosionRadius = 10f;
+    public bool jackUlt = false;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Mob") || other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Mob") || other.gameObject.CompareTag("Enemy") && jackUlt)
         {
-        Debug.Log("hello");
         Transform currentCrate = gameObject.transform;
 
         GameObject pieces = Instantiate(cratePieces, currentCrate.position, currentCrate.rotation);

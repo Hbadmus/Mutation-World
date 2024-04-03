@@ -6,7 +6,7 @@ public class ShootWeapon : MonoBehaviour
 {
     public GameObject ammoPrefab;
 
-    public float speed = 100;
+    public float speed = 50;
     int fireCount = 3;
     GameObject projectile;
 
@@ -14,7 +14,7 @@ public class ShootWeapon : MonoBehaviour
 
     Color originalColor;
 
-    int bulletcounter = 0; // Limit firing to only 1 bullet every 5 fixed frames as Jack
+    int bulletcounter = 0; // Limit firing to only 1 bullet every "bulletcounter" fixed frames
 
     // Start is called before the first frame update
     void Start()
@@ -29,25 +29,24 @@ public class ShootWeapon : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Fire();
-        }
     }
 
     private void FixedUpdate()
     {
-        if (GameObject.FindGameObjectWithTag("Player").name == "Jack")
+        int rateOfFire = 5; // the high
+        if (!CharacterAbilites.isJackAutoActive)
         {
-            if (Input.GetButton("Fire1"))
-            {
-                if (bulletcounter % 5 == 0)
-                {
-                    Fire();
-                }
-            }
-            bulletcounter++;
+            rateOfFire *= 3; //if Jack's ability is not active, slow down fire rate by three
         }
+
+        if (Input.GetButton("Fire1"))
+        {
+            if (bulletcounter % rateOfFire == 0)
+            {
+                Fire();
+            }
+        }
+        bulletcounter++;
     }
 
     private void Fire()

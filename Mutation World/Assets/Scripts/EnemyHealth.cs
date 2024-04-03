@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
 {
 public int startHealth = 100;
+
+    public int damageTaken = 10;
     public AudioClip deathSFX;
     public Slider healthSlider;
     public int currentHealth;
@@ -71,7 +73,7 @@ if (healthSlider.value <= 0) {
 
 private void OnTriggerEnter(Collider other) {
     if(other.CompareTag("Projectile")) {
-        TakeDamage(10);
+        TakeDamage(damageTaken);
     }
 }
 
