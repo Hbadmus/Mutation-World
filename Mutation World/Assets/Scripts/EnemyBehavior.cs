@@ -1,39 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
+using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    public Transform player;
-    public float minDistance = 10;
-    public int damageAmt = 20;
-    Animator animator;
+public Transform player;
+    public float damRate = 2;
+    public int damAmt = 10;
+    
+    float elapsedTime = 0;
+    NavMeshAgent agent;
 
-
+    // Start is called before the first frame update
     void Start()
     {
-        if (player == null)
-        {
+        if(player == null) {
             player = GameObject.FindGameObjectWithTag("Player").transform;
         }
-        animator = GetComponent<Animator>();
+
+        agent = GetComponent<NavMeshAgent>();
     }
 
+    // Update is called once per frame
     void Update()
     {
-        float distance = Vector3.Distance(transform.position, player.transform.position);
-
-        transform.LookAt(player);
-
+        agent.SetDestination(player.position);
+                elapsedTime += Time.deltaTime;
 
 
-        animator.SetBool("attackPlayer", distance < minDistance);
-        animator.SetBool("movementAnimationTrigger", distance > minDistance);
-        
-        if (animator.GetBool("attackPlayer")) {
-        var playerHealth = player.GetComponent<PlayerHealth>();
-        playerHealth.TakeDamage(damageAmt);
+    }
+
+        private void OnTriggerEnter(Collider other) {
+        if(other.CompareTag("Player")) {
+           EnemyDamage();
         }
     }
+
+        void EnemyDamage() {
+        if(elapsedTime >= damRate) {
+        Invoke("DoDamage", 0.3f);
+        elapsedTime = 0.0f;
+        }
+    }
+
+    void DoDamage() {
+        var playerHealth = player.GetComponent<PlayerHealth>();
+        playerHealth.TakeDamage(damAmt);
+    }
+
 }
