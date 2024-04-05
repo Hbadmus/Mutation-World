@@ -177,7 +177,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3091570012523082204}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -247,9 +247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc0f3f566cbf3054ca72679d2db66942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 40
   jumpHeight: 10
-  gravity: 9.81
+  gravity: 40
   airControl: 10
 --- !u!143 &227321381375494236
 CharacterController:
@@ -332,12 +332,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eagleEyeDuration: 5
+  eagleEyeCool: 10
   stormOfArrowsCooldown: 30
   stormOfArrowsRadius: 5
   stormOfArrowsDamage: 50
+  jackAutoMainDuration: 10
+  jackAutoMainCool: 15
+  jackUltShrapnelDuration: 5
+  jackUltShrapnelCool: 20
   enemy: {fileID: 0}
   ammoPrefab: {fileID: 555576899683477725, guid: 7a35d73bfac534c41a493cd59e5c9876, type: 3}
   highlightMat: {fileID: 2100000, guid: cfa82f5daf8744d4aaaaa2fb5fc9d7f9, type: 2}
+  abilityQ: {fileID: 0}
+  abilityE: {fileID: 0}
 --- !u!1001 &3664805974350779267
 PrefabInstance:
   m_ObjectHideFlags: 0

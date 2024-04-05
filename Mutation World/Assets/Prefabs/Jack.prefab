@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3711506416108051839}
   - component: {fileID: 2410985083735974545}
   - component: {fileID: 6827271295869773407}
+  - component: {fileID: 3246510414101298894}
   m_Layer: 0
   m_Name: Jack
   m_TagString: Player
@@ -196,6 +197,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3246510414101298894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3896493569317531207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d195baa68ba81e54a9ad93f78f87ce11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eagleEyeDuration: 5
+  eagleEyeCool: 10
+  stormOfArrowsCooldown: 30
+  stormOfArrowsRadius: 5
+  stormOfArrowsDamage: 50
+  jackAutoMainDuration: 10
+  jackAutoMainCool: 15
+  jackUltShrapnelDuration: 5
+  jackUltShrapnelCool: 20
+  enemy: {fileID: 0}
+  ammoPrefab: {fileID: 1465959751651014018, guid: 492b86f67e435414cb0644ec6042d429, type: 3}
+  highlightMat: {fileID: 2100000, guid: cfa82f5daf8744d4aaaaa2fb5fc9d7f9, type: 2}
+  abilityQ: {fileID: 0}
+  abilityE: {fileID: 0}
 --- !u!1 &4188363375480569395
 GameObject:
   m_ObjectHideFlags: 0

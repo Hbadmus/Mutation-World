@@ -1242,7 +1242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   damRate: 2
-  damAmt: 10
+  damAmt: 20
 --- !u!114 &-7220422892556314834
 MonoBehaviour:
   m_ObjectHideFlags: 0

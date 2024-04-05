@@ -39,6 +39,10 @@ public class LevelManager : MonoBehaviour
         if(!isGameOver) {
         timer += Time.deltaTime;
         }
+        if (timer > 60) 
+        {
+            PlayerWon();
+        }
 
 
     }
@@ -49,6 +53,7 @@ public class LevelManager : MonoBehaviour
         lossUI.SetActive(true);
         AudioSource.PlayClipAtPoint(lose, transform.position);
         DisablePlayerAndEnemies();
+        Invoke("RestartGame", 2);
     }
 
     public void PlayerWon()
@@ -57,6 +62,10 @@ public class LevelManager : MonoBehaviour
         winUI.SetActive(true);
         AudioSource.PlayClipAtPoint(win, transform.position);
         DisablePlayerAndEnemies();
+        if (SceneManager.GetActiveScene().buildIndex < 2)
+        {
+            Invoke("NextLevel", 2);
+        }
     }
 
     void DisablePlayerAndEnemies()
@@ -84,5 +93,10 @@ public class LevelManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

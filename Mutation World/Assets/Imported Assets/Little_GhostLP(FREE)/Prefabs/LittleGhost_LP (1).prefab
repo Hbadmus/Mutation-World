@@ -430,7 +430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   damRate: 2
-  damAmt: 10
+  damAmt: 20
 --- !u!54 &1993163503908524523
 Rigidbody:
   m_ObjectHideFlags: 0
