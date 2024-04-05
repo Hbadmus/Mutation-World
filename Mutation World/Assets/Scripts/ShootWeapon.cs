@@ -51,36 +51,42 @@ public class ShootWeapon : MonoBehaviour
 
     private void Fire()
     {
-        if (CharacterAbilites.isStormOfArrowsActive)
+        if (MouseLook.enable)
         {
-            Debug.Log("Storm of Arrows unleashed!");
-            int numberOfProjectiles = 20;
-
-            for (int i = 0; i < numberOfProjectiles; i++)
+            if (CharacterAbilites.isStormOfArrowsActive)
             {
-                GameObject projectile = Instantiate(ammoPrefab, transform.position + transform.forward, transform.rotation) as GameObject;
-                Rigidbody rb = projectile.GetComponent<Rigidbody>(); // Declare rb inside the loop
+                Debug.Log("Storm of Arrows unleashed!");
+                int numberOfProjectiles = 20;
 
-                rb.AddForce(transform.forward * 100, ForceMode.VelocityChange);
-                Debug.Log("FireCount: " + fireCount);
+                for (int i = 0; i < numberOfProjectiles; i++)
+                {
+                    GameObject projectile = Instantiate(ammoPrefab, transform.position + transform.forward, transform.rotation) as GameObject;
+                    Rigidbody rb = projectile.GetComponent<Rigidbody>(); // Declare rb inside the loop
+
+                    rb.AddForce(transform.forward * 100, ForceMode.VelocityChange);
+                    Debug.Log("FireCount: " + fireCount);
+                }
+                fireCount--; // Increment fireCount after the for loop
+                if (fireCount == 0)
+                {
+                    CharacterAbilites.isStormOfArrowsActive = false;
+                }
             }
-            fireCount--; // Increment fireCount after the for loop
-            if (fireCount == 0)
-            {
-                CharacterAbilites.isStormOfArrowsActive = false;
-            }
+
+            // Making sure projectile goes straight.
+      
+            Quaternion bulletOrientation = transform.rotation * ammoPrefab.transform.rotation;
+
+            projectile = Instantiate(ammoPrefab, transform.position +
+            transform.forward, bulletOrientation) as GameObject;
+
+
+            rb = projectile.GetComponent<Rigidbody>();
+
+            rb.AddForce(transform.forward * speed, ForceMode.VelocityChange);
+
+            projectile.transform.SetParent(GameObject.FindGameObjectWithTag("AmmoTrash").transform);
         }
         
-        // Making sure projectile goes straight.
-        Quaternion bulletOrientation = transform.rotation * Quaternion.Euler(90, 13, 0);
-
-        projectile = Instantiate(ammoPrefab, transform.position +
-        transform.forward, bulletOrientation) as GameObject;
-
-        rb = projectile.GetComponent<Rigidbody>();
-
-        rb.AddForce(transform.forward * speed, ForceMode.VelocityChange);
-
-        projectile.transform.SetParent(GameObject.FindGameObjectWithTag("AmmoTrash").transform);
     }
 }

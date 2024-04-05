@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterAbilites : MonoBehaviour
 {
@@ -28,32 +29,69 @@ public class CharacterAbilites : MonoBehaviour
     public static bool isJackAutoActive = false;
     public static bool isJackShrapnelActive = false;
 
+    
+    public Image abilityQ;
+    public Image abilityE;
+    
+
     // Start is called before the first frame update
     void Start()
     {
+
         if (enemy != null)
         {
             originalMat = enemy.GetComponent<SkinnedMeshRenderer>().material;
         }
+        
+        abilityQ = GameObject.Find("Ability Canvas").transform.Find("AbilityQ").GetComponent<Image>();
+        abilityE = GameObject.Find("Ability Canvas").transform.Find("AbilityE").GetComponent<Image>();
+        abilityQ.fillAmount = 0;
+        abilityE.fillAmount = 0;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        updateCooldown();
 
-        if (gameObject.name == "Fiona")
+        updateCooldown();
+        
+        if (gameObject.name.Contains("Fiona"))
         {
-            if (Input.GetKeyDown(KeyCode.Q) && eagleEyeCool <= 0)
+            if (Input.GetKeyDown(KeyCode.Q) && !isEagleEyeActive)
             {
                 ActivateEagleEye();
             }
-            if (Input.GetKeyDown(KeyCode.E) && stormOfArrowsCooldown <= 0)
+            if (Input.GetKeyDown(KeyCode.E) && !isStormOfArrowsActive)
             {
                 UseStormOfArrows();
             }
+
+            // Cooldown timer for Q
+            if (isEagleEyeActive)
+            {
+                abilityQ.fillAmount -= 1 / eagleEyeDuration * Time.deltaTime;
+                if (abilityQ.fillAmount < 0)
+                {
+                    DeactivateEagleEye();
+                    abilityQ.fillAmount = 0;
+                    
+                }
+            }
+
+            // Cooldown timer for E
+            if (isStormOfArrowsActive)
+            {
+                abilityE.fillAmount -= 1 / stormOfArrowsCooldown * Time.deltaTime;
+                if (abilityE.fillAmount < 0)
+                {
+                    abilityE.fillAmount = 0;
+                    isStormOfArrowsActive = false;
+                }
+            }
+            
         }
-        if (gameObject.name == "Jack")
+        if (gameObject.name.Contains("Jack"))
         {
             if (Input.GetKeyDown(KeyCode.Q) && jackAutoMainCool <= 0)
             {
@@ -63,30 +101,74 @@ public class CharacterAbilites : MonoBehaviour
             {
                 ActivateJackShrapnel();
             }
+
+            // Cooldown timer for Q
+            if (isJackAutoActive)
+            {
+                abilityQ.fillAmount -= 1 / jackAutoMainCool * Time.deltaTime;
+                if (abilityQ.fillAmount < 0)
+                {
+                    DeactivateJackAuto();
+                    abilityQ.fillAmount = 0;
+                }
+            }
+
+            // Cooldown timer for E
+            if (isStormOfArrowsActive)
+            {
+                abilityE.fillAmount -= 1 / jackUltShrapnelCool * Time.deltaTime;
+                if (abilityE.fillAmount < 0)
+                {
+                    abilityE.fillAmount = 0;
+                    isJackShrapnelActive = false;
+                }
+            }
         }
     }
 
+    // Fiona's ability
     void ActivateEagleEye()
     {
-        if (!isEagleEyeActive)
+
+        isEagleEyeActive = true;
+        abilityQ.fillAmount = 1;
+        if (enemy)
         {
-            isEagleEyeActive = true;
-            eagleEyeCool = 10f;
             enemy.GetComponent<SkinnedMeshRenderer>().material = highlightMat;
-            Invoke("DeactivateEagleEye", eagleEyeDuration);
         }
+
+        Invoke("DeactivateEagleEye", eagleEyeDuration);
+
     }
 
     void DeactivateEagleEye()
     {
         isEagleEyeActive = false;
-        enemy.GetComponent<SkinnedMeshRenderer>().material = originalMat;
+        if (enemy)
+        {
+            enemy.GetComponent<SkinnedMeshRenderer>().material = originalMat;
+        }
+
     }
 
+    void UseStormOfArrows()
+    {
+        abilityE.fillAmount = 1;
+        isStormOfArrowsActive = true;
+    }
+
+    void ResetStormOfArrowsCooldown()
+    {
+        isStormOfArrowsReady = true;
+        Debug.Log("Storm of Arrows ready to use.");
+    }
+
+    // Jack's ability
     void ActivateJackAuto()
     {
         if (!isJackAutoActive)
         {
+            abilityQ.fillAmount = 1;
             isJackAutoActive = true;
             jackAutoMainCool = 15f;
             Invoke("DeactivateJackAuto", jackAutoMainDuration);
@@ -102,6 +184,7 @@ public class CharacterAbilites : MonoBehaviour
     {
         if (!isJackShrapnelActive)
         {
+            abilityE.fillAmount = 1;
             isJackShrapnelActive = true;
             jackUltShrapnelCool = 20f;
             Invoke("DeactivateJackShrapnel", jackUltShrapnelDuration);
@@ -111,18 +194,6 @@ public class CharacterAbilites : MonoBehaviour
     void DeactivateJackShrapnel()
     {
         isJackShrapnelActive = false;
-    }
-
-    void UseStormOfArrows()
-    {
-        isStormOfArrowsActive = true;
-        stormOfArrowsCooldown = 30f;
-    }
-
-    void ResetStormOfArrowsCooldown()
-    {
-        isStormOfArrowsReady = true;
-        Debug.Log("Storm of Arrows ready to use.");
     }
 
     void updateCooldown()

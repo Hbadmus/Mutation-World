@@ -61,7 +61,7 @@ Transform:
   m_GameObject: {fileID: 1465959751651014018}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 6.668, y: 5.699, z: -48.729}
+  m_LocalPosition: {x: 6.4369063, y: 5.699, z: -48.620323}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -77,7 +77,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1465959751651014018}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 44c4e7f330952134eae5e89e9caf1fa5, type: 3}
   m_Controller: {fileID: 9100000, guid: b6b052137f4ae6f45b82160f59ce9f2d, type: 2}
   m_CullingMode: 1
@@ -98,7 +98,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1465959751651014018}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.05
   m_Drag: 0
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -112,11 +112,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &4892896821494801440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +168,7 @@ MonoBehaviour:
   cratePieces: {fileID: 9110472373263078871, guid: 75ac0c38d22c92140b692ba8f25942fc, type: 3}
   explosionForce: 3000
   explosionRadius: 5
+  jackUlt: 0
 --- !u!1 &6991370733690786901
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +195,7 @@ Transform:
   m_GameObject: {fileID: 6991370733690786901}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.88533247, y: 0.88533247, z: 0.88533247}
   m_ConstrainProportionsScale: 0
   m_Children: []
