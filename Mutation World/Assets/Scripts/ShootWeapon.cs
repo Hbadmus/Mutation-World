@@ -5,10 +5,12 @@ using UnityEngine;
 public class ShootWeapon : MonoBehaviour
 {
     public GameObject ammoPrefab;
+    public AudioSource fireSound;
 
     public float speed = 50;
     int fireCount = 3;
     GameObject projectile;
+    Animator akAnimation;
 
     Rigidbody rb;
 
@@ -23,6 +25,7 @@ public class ShootWeapon : MonoBehaviour
         {
             speed *= 3;
         }
+        akAnimation = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -37,6 +40,7 @@ public class ShootWeapon : MonoBehaviour
 
     private void FixedUpdate()
     {
+        DoneFiring();
         int rateOfFire = 5; // the high
         if (!CharacterAbilites.isJackAutoActive)
         {
@@ -49,48 +53,61 @@ public class ShootWeapon : MonoBehaviour
             {
                 Fire();
             }
+            bulletcounter++;
         }
-        bulletcounter++;
     }
 
-    private void Fire()
-    {
-        if (MouseLook.enable)
+        private void Fire()
         {
-            if (CharacterAbilites.isStormOfArrowsActive)
+            if (MouseLook.enable)
             {
-                Debug.Log("Storm of Arrows unleashed!");
-                int numberOfProjectiles = 20;
-
-                for (int i = 0; i < numberOfProjectiles; i++)
+                if (CharacterAbilites.isStormOfArrowsActive)
                 {
-                    GameObject projectile = Instantiate(ammoPrefab, transform.position + transform.forward, transform.rotation) as GameObject;
-                    Rigidbody rb = projectile.GetComponent<Rigidbody>(); // Declare rb inside the loop
+                    Debug.Log("Storm of Arrows unleashed!");
+                    int numberOfProjectiles = 20;
 
-                    rb.AddForce(transform.forward * 100, ForceMode.VelocityChange);
-                    Debug.Log("FireCount: " + fireCount);
+                    for (int i = 0; i < numberOfProjectiles; i++)
+                    {
+                        GameObject projectile = Instantiate(ammoPrefab, transform.position + transform.forward, transform.rotation) as GameObject;
+                        Rigidbody rb = projectile.GetComponent<Rigidbody>(); // Declare rb inside the loop
+
+                        rb.AddForce(transform.forward * 100, ForceMode.VelocityChange);
+                        Debug.Log("FireCount: " + fireCount);
+                    }
+                    fireCount--; // Increment fireCount after the for loop
+                    if (fireCount == 0)
+                    {
+                        CharacterAbilites.isStormOfArrowsActive = false;
+                    }
                 }
-                fireCount--; // Increment fireCount after the for loop
-                if (fireCount == 0)
+
+                if (GameObject.FindGameObjectWithTag("Player").name == "Jack")
                 {
-                    CharacterAbilites.isStormOfArrowsActive = false;
+                    playSound();
+                    akAnimation.SetInteger("firingState", 1);
                 }
+                // Making sure projectile goes straight.
+                Quaternion bulletOrientation = transform.rotation * Quaternion.Euler(90, 13, 0);
+
+                projectile = Instantiate(ammoPrefab, transform.position +
+                transform.forward, bulletOrientation) as GameObject;
+
+
+                rb = projectile.GetComponent<Rigidbody>();
+
+                rb.AddForce(transform.forward * speed, ForceMode.VelocityChange);
+
+                projectile.transform.SetParent(GameObject.FindGameObjectWithTag("AmmoTrash").transform);
             }
-
-            // Making sure projectile goes straight.
-      
-            Quaternion bulletOrientation = transform.rotation * ammoPrefab.transform.rotation;
-
-            projectile = Instantiate(ammoPrefab, transform.position +
-            transform.forward, bulletOrientation) as GameObject;
-
-
-            rb = projectile.GetComponent<Rigidbody>();
-
-            rb.AddForce(transform.forward * speed, ForceMode.VelocityChange);
-
-            projectile.transform.SetParent(GameObject.FindGameObjectWithTag("AmmoTrash").transform);
         }
-        
+
+    void DoneFiring()
+    {
+        akAnimation.SetInteger("firingState", 0);
+    }
+
+    void playSound()
+    {
+        fireSound.Play();
     }
 }
