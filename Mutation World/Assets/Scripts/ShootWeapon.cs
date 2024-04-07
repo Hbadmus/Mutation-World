@@ -21,7 +21,7 @@ public class ShootWeapon : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag("Player").name == "Jack")
         {
-            speed *= 10;
+            speed *= 3;
         }
     }
 
@@ -29,6 +29,10 @@ public class ShootWeapon : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetButtonDown("Fire1")) // Single Fire
+        {
+            Fire();
+        }
     }
 
     private void FixedUpdate()
@@ -39,7 +43,7 @@ public class ShootWeapon : MonoBehaviour
             rateOfFire *= 3; //if Jack's ability is not active, slow down fire rate by three
         }
 
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1")) // Hold down for automatic firing
         {
             if (bulletcounter % rateOfFire == 0)
             {
