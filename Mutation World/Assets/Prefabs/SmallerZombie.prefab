@@ -1336,6 +1336,8 @@ GameObject:
   - component: {fileID: 7131552842587422828}
   - component: {fileID: 2011258000382406260}
   - component: {fileID: 7512231303593535829}
+  - component: {fileID: 4513803537482499490}
+  - component: {fileID: -5955119383302760604}
   m_Layer: 6
   m_Name: SmallerZombie
   m_TagString: Enemy
@@ -1488,14 +1490,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   Attackdistance: 8
-  ChaseDis: 50
   throwable: {fileID: 0}
   spawnpoint: {fileID: 0}
   player: {fileID: 0}
   damRate: 1
   damAmt: 1
-  damBossAmt: 10
   timer: 1
+  enemyEyes: {fileID: 5860328705260306591}
+  FOV: 210
 --- !u!114 &7512231303593535829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1513,8 +1515,42 @@ MonoBehaviour:
   deathSFX: {fileID: 0}
   healthSlider: {fileID: 4451990528565315455}
   currentHealth: 50
-  pickupPrefab: {fileID: 7282382296041279821, guid: 7e2add688113470449cf433477661599, type: 3}
+  pickupPrefab: {fileID: 165310, guid: 4cdcc6c16809ba5439c8798d9bb925f4, type: 3}
   dropRate: 0.1
+--- !u!114 &4513803537482499490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6249381672551580829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f7698be43578394788d8c0e5654b0d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!195 &-5955119383302760604
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6249381672551580829}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &6341408273339083133
 GameObject:
   m_ObjectHideFlags: 0
