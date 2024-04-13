@@ -1498,6 +1498,7 @@ MonoBehaviour:
   timer: 1
   enemyEyes: {fileID: 5860328705260306591}
   FOV: 210
+  vicinityRadius: 60
 --- !u!114 &7512231303593535829
 MonoBehaviour:
   m_ObjectHideFlags: 0

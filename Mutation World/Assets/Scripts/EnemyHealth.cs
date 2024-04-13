@@ -42,11 +42,6 @@ if (healthSlider.value <= 0) {
             healthSlider.value = currentHealth;
         }
 
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-
         Debug.Log("Current Health: " + healthSlider.value);
     }
 
@@ -57,13 +52,8 @@ if (healthSlider.value <= 0) {
         }
     }
 
-    private void Die()
-    {
-        DropPickup();
-        Destroy(gameObject);
-    }
 
-    private void DropPickup()
+    public void DropPickup()
     {
         if (pickupPrefab != null && Random.value < dropRate)
         {

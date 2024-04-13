@@ -11,6 +11,7 @@ public Transform player;
     
     float elapsedTime = 0;
     NavMeshAgent agent;
+    int health;
 
     // Start is called before the first frame update
     void Start()
@@ -20,14 +21,21 @@ public Transform player;
         }
 
         agent = GetComponent<NavMeshAgent>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        health = GetComponent<EnemyHealth>().currentHealth;
+
         agent.SetDestination(player.position);
                 elapsedTime += Time.deltaTime;
 
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
 
     }
 

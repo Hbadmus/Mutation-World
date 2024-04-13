@@ -23,6 +23,7 @@ public class EnemyAI : MonoBehaviour
     public int timer = 1;
     public Transform enemyEyes;
     public int FOV;
+    public int vicinityRadius;
    
     EnemyHealth enemyHealth; 
     int health;
@@ -33,6 +34,7 @@ public class EnemyAI : MonoBehaviour
     bool hasAttacked;
     bool isDead;
     ZombieAI zombieAI;
+    bool hasDroppedPickup = false;
 
     void Start()
     {
@@ -55,6 +57,7 @@ public class EnemyAI : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
         zombieAI = GetComponent<ZombieAI>();
+        agent.isStopped = true;
 
         InvokeRepeating("IncrementTimer", 0f, 1f);
     }
@@ -63,7 +66,16 @@ public class EnemyAI : MonoBehaviour
     {
         health = enemyHealth.currentHealth;
         disToPlayer = Vector3.Distance(transform.position, player.transform.position);
+   
+     if (health <= 0)
+        {
+            if (gameObject.CompareTag("Boss"))
+            {
+                LevelManager.instance.PlayerWon();
+            }
 
+            currentState = FSMStates.Dead;
+        }
         switch (currentState)
         {
             case FSMStates.Idle:
@@ -82,24 +94,17 @@ public class EnemyAI : MonoBehaviour
 
         elapsedTime += Time.deltaTime;
 
-        if (health <= 0)
-        {
-            if (gameObject.CompareTag("Boss"))
-            {
-                LevelManager.instance.PlayerWon();
-            }
-            currentState = FSMStates.Dead;
-        }
     }
 
     void UpdateIdleState()
     {
-        if (disToPlayer > Attackdistance && IsPlayerInClearPOV())
+        if ((disToPlayer > Attackdistance && IsPlayerInClearPOV()) 
+        || IsPlayerInVicinity(vicinityRadius))
         {
-            agent.isStopped = false;
             zombieAI.SetIdleAnimation(false);
             zombieAI.SetMovementAnimationTrigger();
             agent.SetDestination(player.position);
+            agent.isStopped = false;
             currentState = FSMStates.Chase;
         }
     }
@@ -109,23 +114,20 @@ public class EnemyAI : MonoBehaviour
         FaceTarget(player.transform.position);
         if (disToPlayer <= Attackdistance)
         {
-            agent.isStopped = true;
             zombieAI.SetAttackAnimation(true);
-            zombieAI.SetMovementAnimationTrigger();
+            agent.isStopped = true;
             currentState = FSMStates.Attack;
         }
-        else if(!IsPlayerInClearPOV())
+        else if(!IsPlayerInClearPOV()  && !IsPlayerInVicinity(vicinityRadius))
         {
-            agent.isStopped = true;
             zombieAI.SetIdleAnimation(true);
-            zombieAI.SetMovementAnimationTrigger();
+            agent.isStopped = true;
             currentState = FSMStates.Idle;
         }
         else if (timer % 10f == 0 && gameObject.CompareTag("Boss") && disToPlayer > Attackdistance)
         {
-            agent.isStopped = true;
             zombieAI.SetAttackAnimation(true);
-            zombieAI.SetMovementAnimationTrigger();
+            agent.isStopped = true;
             currentState = FSMStates.Attack;
         }
     }
@@ -144,37 +146,47 @@ public class EnemyAI : MonoBehaviour
             hasAttacked = true;
             if (hasAttacked)
             {
-                agent.isStopped = false;
                 zombieAI.SetMovementAnimationTrigger();
                 agent.SetDestination(player.position);
                 zombieAI.SetAttackAnimation(false);
+                agent.isStopped = false;
                 currentState = FSMStates.Chase;
 
             }
         }
         if (disToPlayer > Attackdistance)
         {
-            agent.isStopped = false;
+
             zombieAI.SetMovementAnimationTrigger();
             agent.SetDestination(player.position);
             zombieAI.SetAttackAnimation(false);
+            agent.isStopped = false;
             currentState = FSMStates.Chase;
 
-        } else if (!IsPlayerInClearPOV()) {
+        } else if (!IsPlayerInClearPOV() && !IsPlayerInVicinity(vicinityRadius)) {
+
             zombieAI.SetAttackAnimation(false);
             zombieAI.SetIdleAnimation(true);
+            agent.isStopped = true;
             currentState = FSMStates.Idle;
         }
 
         EnemyDamage();
     }
 
-    void UpdateDeadState()
-    {
-        zombieAI.SetZeroHealthAnimation();
-        isDead = true;
-        Destroy(gameObject, 5);
+void UpdateDeadState()
+{
+    zombieAI.SetZeroHealthAnimation();
+    var enemyHealth = gameObject.GetComponent<EnemyHealth>();
+    isDead = true;
+
+    if (!hasDroppedPickup) {
+        enemyHealth.DropPickup();
+        hasDroppedPickup = true; 
     }
+
+    Destroy(gameObject, 2);
+}
 
     void FaceTarget(Vector3 target)
     {
@@ -228,5 +240,19 @@ public class EnemyAI : MonoBehaviour
         }
         return false;
     } 
+
+    bool IsPlayerInVicinity(int vicinityRadius) {
+    Collider[] colliders = Physics.OverlapSphere(enemyEyes.position, vicinityRadius);
+    
+    foreach(Collider col in colliders) {
+        if(col.CompareTag("Player")) {
+            print("Player in vicinity");
+            return true;
+        }
+    }
+    
+    return false;
+}
+
 
 }
