@@ -5,12 +5,12 @@ using UnityEngine;
 public class ShootWeapon : MonoBehaviour
 {
     public GameObject ammoPrefab;
-    public AudioSource fireSound;
+    //public AudioSource fireSound;
 
     public float speed = 50;
     int fireCount = 3;
     GameObject projectile;
-    Animator akAnimation;
+    Animator recoilAnimation;
 
     Rigidbody rb;
 
@@ -25,7 +25,7 @@ public class ShootWeapon : MonoBehaviour
         {
             speed *= 3;
         }
-        akAnimation = GetComponentInChildren<Animator>();
+        recoilAnimation = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -81,10 +81,10 @@ public class ShootWeapon : MonoBehaviour
                     }
                 }
 
-                if (GameObject.FindGameObjectWithTag("Player").name == "Jack")
+                if (GameObject.FindGameObjectWithTag("Player").name != "Fiona")
                 {
-                    playSound();
-                    akAnimation.SetInteger("firingState", 1);
+                    //playSound();
+                    recoilAnimation.SetInteger("firingState", 1);
                 }
                 // Making sure projectile goes straight.
                 Quaternion bulletOrientation = transform.rotation * Quaternion.Euler(90, 13, 0);
@@ -103,11 +103,11 @@ public class ShootWeapon : MonoBehaviour
 
     void DoneFiring()
     {
-        akAnimation.SetInteger("firingState", 0);
+        recoilAnimation.SetInteger("firingState", 0);
     }
 
-    void playSound()
+    /*void playSound()
     {
         fireSound.Play();
-    }
+    }*/
 }

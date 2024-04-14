@@ -62,7 +62,7 @@ public class LevelManager : MonoBehaviour
         winUI.SetActive(true);
         AudioSource.PlayClipAtPoint(win, transform.position);
         DisablePlayerAndEnemies();
-        if (SceneManager.GetActiveScene().buildIndex < 2)
+        if (SceneManager.GetActiveScene().buildIndex < 3)
         {
             Invoke("NextLevel", 2);
         }
