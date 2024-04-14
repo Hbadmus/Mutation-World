@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 486830}
   - component: {fileID: 9580444}
   - component: {fileID: 3896301678066438260}
+  - component: {fileID: -8275972732457376211}
   m_Layer: 0
   m_Name: box_med
   m_TagString: Untagged
@@ -185,6 +186,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthGain: 20
   respawnTime: 5
+--- !u!65 &-8275972732457376211
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165310}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.3, z: 1}
+  m_Center: {x: 0, y: 0.15, z: 0}
 --- !u!1 &177648
 GameObject:
   m_ObjectHideFlags: 0

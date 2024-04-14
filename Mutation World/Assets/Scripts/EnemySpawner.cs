@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
     {
         InvokeRepeating("SpawnEnemy1", spawnTime1, 7);
         InvokeRepeating("SpawnEnemy2", spawnTime2, 7);
-        Invoke("SpawnBoss", bossSpawnTime);
+       // Invoke("SpawnBoss", bossSpawnTime);
     }
 
     // Update is called once per frame

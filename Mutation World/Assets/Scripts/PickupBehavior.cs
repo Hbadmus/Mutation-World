@@ -19,8 +19,7 @@ public class PickupBehavior : MonoBehaviour
             {
                 gameObject.SetActive(false);
                 FindObjectOfType<PlayerHealth>().HealDamage(healthGain);
-                RespawnManager.Instance.StartRespawn(gameObject, respawnTime);
-            }
+                            }
     }
 
     private IEnumerator RespawnCoroutine()

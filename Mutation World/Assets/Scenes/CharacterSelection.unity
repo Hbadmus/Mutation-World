@@ -353,6 +353,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1750024511}
     m_Modifications:
+    - target: {fileID: 623391949695008435, guid: 612c7643c849eb548946fafdedca4a3d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 862440684438010833, guid: 612c7643c849eb548946fafdedca4a3d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3091570012523082204, guid: 612c7643c849eb548946fafdedca4a3d, type: 3}
       propertyPath: m_Name
       value: Fiona
@@ -642,6 +650,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1750024511}
     m_Modifications:
+    - target: {fileID: 485906624290156100, guid: 0a462f067dbdf5d4bbd47167d1a54c81, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1721163786147183941, guid: 0a462f067dbdf5d4bbd47167d1a54c81, type: 3}
       propertyPath: m_Name
       value: Ace
@@ -703,6 +715,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1750024511}
     m_Modifications:
+    - target: {fileID: 2410985083735974545, guid: 600c10cec3122704fbb511c03bc70d74, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246510414101298894, guid: 600c10cec3122704fbb511c03bc70d74, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3896493569317531207, guid: 600c10cec3122704fbb511c03bc70d74, type: 3}
       propertyPath: m_Name
       value: Jack

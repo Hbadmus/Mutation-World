@@ -15,83 +15,101 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = startHealth;
+        if (healthSlider == null ) 
+        {
+            healthSlider = FindObjectOfType<Slider>();
+        }
         healthSlider.value = currentHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.name == "Ace" && Input.GetKeyDown(KeyCode.Q)) {
+        if (gameObject.name == "Ace" && Input.GetKeyDown(KeyCode.Q))
+        {
             StartCoroutine(AceDamageReductionMode());
         }
     }
 
-    IEnumerator AceDamageReductionMode() {
+    IEnumerator AceDamageReductionMode()
+    {
         isAceDamageReductionActive = true;
         yield return new WaitForSeconds(aceDamageReductionDuration);
         isAceDamageReductionActive = false;
     }
 
-    public void TakeDamage(int dam) {
+    public void TakeDamage(int dam)
+    {
         if (gameObject.name == "Jack")
         {
             dam /= 2;
         }
 
-        if (gameObject.name == "Ace" && isAceDamageReductionActive) {
-            dam /= 2; 
+        if (gameObject.name == "Ace" && isAceDamageReductionActive)
+        {
+            dam /= 2;
         }
 
-        if(currentHealth > 0) {
+        if (currentHealth > 0)
+        {
             currentHealth -= dam;
             healthSlider.value = currentHealth;
         }
 
-        if(currentHealth <= 0) {
+        if (currentHealth <= 0)
+        {
             PlayerDies();
         }
         Debug.Log("Current Health: " + currentHealth);
     }
 
-        public void TakeBossDamage(int dam) {
-        if(currentHealth > 0) {
+    public void TakeBossDamage(int dam)
+    {
+        if (currentHealth > 0)
+        {
             currentHealth -= dam;
             healthSlider.value = currentHealth;
         }
 
-        if(currentHealth <= 0) {
+        if (currentHealth <= 0)
+        {
             PlayerDies();
         }
         Debug.Log("Current Health: " + currentHealth);
     }
 
-    public void HealDamage(int healing) {
-     if(currentHealth < 100) {
-         currentHealth += healing;
-         if(currentHealth > 100) {
-            currentHealth = 100;
-         }
-         healthSlider.value = currentHealth;
-     }
+    public void HealDamage(int healing)
+    {
+        if (currentHealth < 100)
+        {
+            currentHealth += healing;
+            if (currentHealth > 100)
+            {
+                currentHealth = 100;
+            }
+            healthSlider.value = currentHealth;
+        }
     }
 
-    void PlayerDies() {
+    void PlayerDies()
+    {
 
         transform.Rotate(-90, 0, 0, Space.Self);
         var rb = GetComponent<Rigidbody>();
-        if(rb != null) {
-            rb.isKinematic = true; 
+        if (rb != null)
+        {
+            rb.isKinematic = true;
             rb.detectCollisions = false; // Stops the Rigidbody from detecting collisions
         }
         Debug.Log("You died");
         LevelManager.instance.PlayerDied();
     }
 
-        void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Throwable"))
         {
-            
+
             TakeBossDamage(10);
         }
     }

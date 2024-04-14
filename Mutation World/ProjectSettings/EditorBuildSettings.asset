@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lvl1-Zombies.unity
     guid: 1da29803bddbd604aaa9a6a259c92bc1
+  - enabled: 1
+    path: Assets/Scenes/Lv2.unity
+    guid: 535985bef0f665a4db53e7f37ef2bad4
   m_configObjects: {}
