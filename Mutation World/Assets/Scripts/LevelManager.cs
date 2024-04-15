@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     public AudioClip lose;
     public AudioClip win;
     public bool isGameOver;
-    public float timer = 0;
+    public float timer = 0.0f;
 
 
     private void Awake()
@@ -28,6 +28,7 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+        timer = 0;
         winUI.SetActive(false);
         lossUI.SetActive(false);
         isGameOver = false;
@@ -37,11 +38,11 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         if(!isGameOver) {
-        timer += Time.deltaTime;
+        timer += 1;
         }
         if (timer > 60) 
         {
-            PlayerWon();
+           //PlayerWon();
         }
 
 
@@ -73,8 +74,8 @@ public class LevelManager : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
         camera.GetComponent<MouseLook>().enabled = false;
-        camera.GetComponent<ShootWeapon>().enabled = false; // Assuming your script is called ShootWeapon
-        player.GetComponent<PlayerController>().enabled = false; // Disable player movement script here
+        camera.GetComponent<ShootWeapon>().enabled = false; 
+        player.GetComponent<PlayerController>().enabled = false; 
         
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)

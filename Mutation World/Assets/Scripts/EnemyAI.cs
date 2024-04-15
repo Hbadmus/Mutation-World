@@ -71,7 +71,7 @@ public class EnemyAI : MonoBehaviour
         {
             if (gameObject.CompareTag("Boss"))
             {
-                LevelManager.instance.PlayerWon();
+                //LevelManager.instance.PlayerWon();
             }
 
             currentState = FSMStates.Dead;
