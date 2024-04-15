@@ -14,6 +14,10 @@ public class CharacterAbilites : MonoBehaviour
     public float jackAutoMainCool = 15f;
     public float jackUltShrapnelDuration = 5f;
     public float jackUltShrapnelCool = 20f;
+    public float aceQablity = 8f;
+    public float aceQcd = 15f;
+    public float aceEablity = 5f;
+    public float aceEcd = 20f;
 
     public GameObject enemy;
     public GameObject ammoPrefab;
@@ -123,6 +127,11 @@ public class CharacterAbilites : MonoBehaviour
                     isJackShrapnelActive = false;
                 }
             }
+        }
+
+        if (gameObject.name.Contains("Ace"))
+        {
+
         }
     }
 

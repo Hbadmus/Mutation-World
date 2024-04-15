@@ -30,9 +30,10 @@ public int startHealth = 100;
     {
         healthSlider.value = Mathf.Clamp(currentHealth, 0, 100);
 
-if (healthSlider.value <= 0) {
-    healthSlider.gameObject.SetActive(false);
-}
+        if (healthSlider.value <= 0) {
+            DropPickup();
+            healthSlider.gameObject.SetActive(false);
+        }
 
     }
 

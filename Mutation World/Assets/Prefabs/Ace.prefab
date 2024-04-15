@@ -106,7 +106,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0
   m_Height: 2
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd40f4e405d53af4cb315ade4fee79f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoPrefab: {fileID: 1465959751651014018, guid: 492b86f67e435414cb0644ec6042d429, type: 3}
+  ammoPrefab: {fileID: 100000, guid: c667a58b9adcfc74aa34977f2b970d9e, type: 3}
   speed: 50
 --- !u!1001 &5513177310611471226
 PrefabInstance:

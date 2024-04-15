@@ -1956,14 +1956,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   Attackdistance: 8
-  ChaseDis: 50
   throwable: {fileID: 0}
   spawnpoint: {fileID: 0}
   player: {fileID: 0}
   damRate: 2
   damAmt: 10
-  damBossAmt: 10
   timer: 1
+  enemyEyes: {fileID: 0}
+  FOV: 0
+  vicinityRadius: 0
 --- !u!114 &8202865088643014638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1981,7 +1982,7 @@ MonoBehaviour:
   deathSFX: {fileID: 0}
   healthSlider: {fileID: 2323842391337707252}
   currentHealth: 50
-  pickupPrefab: {fileID: 0}
+  pickupPrefab: {fileID: 165310, guid: 4cdcc6c16809ba5439c8798d9bb925f4, type: 3}
   dropRate: 0.1
 --- !u!1 &6129776988946820250
 GameObject:

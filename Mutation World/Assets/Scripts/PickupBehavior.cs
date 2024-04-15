@@ -17,9 +17,9 @@ public class PickupBehavior : MonoBehaviour
     {
             if (other.CompareTag("Player"))
             {
-                gameObject.SetActive(false);
                 FindObjectOfType<PlayerHealth>().HealDamage(healthGain);
-                            }
+                gameObject.SetActive(false);
+            }
     }
 
     private IEnumerator RespawnCoroutine()
