@@ -61,11 +61,18 @@ public int startHealth = 100;
             Instantiate(pickupPrefab, transform.position, Quaternion.identity);
         }
     }
-
-private void OnTriggerEnter(Collider other) {
-    if(other.CompareTag("Projectile")) {
-        TakeDamage(damageTaken);
+    
+    private void OnTriggerEnter(Collider other) {
+        if(other.CompareTag("Projectile")) {
+            TakeDamage(damageTaken);
+        } else if (other.CompareTag("JackBullet"))
+        {
+            if (CharacterAbilites.isJackShrapnelActive)
+            {
+                TakeDamage(damageTaken);
+            } else {
+                TakeDamage(damageTaken / 2);
+            }
+        }
     }
-}
-
-}
+}   

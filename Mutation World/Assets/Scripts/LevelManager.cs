@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -5,13 +6,15 @@ using UnityEngine.UI;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
-
+    
+    public GameObject reloadPopUp; // tells the player to reload
     public GameObject winUI;
     public GameObject lossUI;
     public AudioClip lose;
     public AudioClip win;
     public bool isGameOver;
-    public float timer = 0.0f;
+    public float currentTime = 0.0f; // The current time, not the time needed to win
+    public float winTime = 60f; // This should be altered for the final, but this is low for testing
 
 
     private void Awake()
@@ -28,7 +31,10 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        timer = 0;
+        if(reloadPopUp == null)
+        {
+            reloadPopUp = GameObject.FindGameObjectWithTag("Reload");
+        }
         winUI.SetActive(false);
         lossUI.SetActive(false);
         isGameOver = false;
@@ -38,11 +44,11 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         if(!isGameOver) {
-        timer += 1;
+        currentTime += Time.deltaTime;
         }
-        if (timer > 60) 
+        if (currentTime > winTime) 
         {
-           //PlayerWon();
+           PlayerWon();
         }
 
 

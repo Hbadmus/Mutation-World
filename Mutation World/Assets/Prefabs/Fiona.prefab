@@ -121,6 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoPrefab: {fileID: 555576899683477725, guid: 7a35d73bfac534c41a493cd59e5c9876, type: 3}
+  reloadSFX: {fileID: 0}
+  ammoCount: {fileID: 0}
   speed: 50
 --- !u!1 &3091570012523082204
 GameObject:
@@ -336,10 +338,14 @@ MonoBehaviour:
   stormOfArrowsCooldown: 30
   stormOfArrowsRadius: 5
   stormOfArrowsDamage: 50
-  jackAutoMainDuration: 10
+  jackAutoMainDuration: 7
   jackAutoMainCool: 15
-  jackUltShrapnelDuration: 5
-  jackUltShrapnelCool: 20
+  jackUltShrapnelDuration: 7
+  jackUltShrapnelCool: 15
+  aceQablity: 8
+  aceQcd: 15
+  aceEablity: 5
+  aceEcd: 20
   enemy: {fileID: 0}
   ammoPrefab: {fileID: 555576899683477725, guid: 7a35d73bfac534c41a493cd59e5c9876, type: 3}
   highlightMat: {fileID: 2100000, guid: cfa82f5daf8744d4aaaaa2fb5fc9d7f9, type: 2}

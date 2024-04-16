@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShootWeapon : MonoBehaviour
 {
     public GameObject ammoPrefab;
-    //public AudioSource fireSound;
+    public AudioSource reloadSFX;
+    public Text ammoCount;
 
-    public float speed = 50;
+    public float speed = 50; // bullet speed
     int fireCount = 3;
     GameObject projectile;
-    Animator recoilAnimation;
-
+    Animator animState;
+    GameObject player;
+    int maxAmmoInClip;
+    int ammoInClip;
+    bool reloading;
+    bool canShoot;
     Rigidbody rb;
+    TextMeshPro ammoUI; // tells the player how much ammo they have
 
     Color originalColor;
 
@@ -21,39 +29,88 @@ public class ShootWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (GameObject.FindGameObjectWithTag("Player").name == "Jack")
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        ammoCount = FindAnyObjectByType<Text>();
+
+        if (player.name.Contains("Jack"))
         {
             speed *= 3;
+            ammoInClip = 30;
+        } else if (player.name.Contains("Ace"))
+        {
+            ammoInClip = 12;
+        } else // Fiona doesn't reload
+        {
+            ammoInClip = 999999999;
+            ammoCount.gameObject.SetActive(false);
         }
-        recoilAnimation = GetComponentInChildren<Animator>();
+        maxAmmoInClip = ammoInClip;
+
+        ammoCount.text = (ammoInClip + "/" + maxAmmoInClip);
+
+        animState = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1")) // Single Fire
+        if (Input.GetKeyDown(KeyCode.R) && !player.name.Contains("Fiona")
+                && ammoInClip != maxAmmoInClip && animState.GetInteger("firingState") == 0)
         {
-            Fire();
+            reloadSFX.Play();
+            reloading = true;
+            animState.SetInteger("firingState", 2);
+            if (player.name.Contains("Jack"))
+            {
+                Invoke("DoneReload", 3);
+            } else
+            {
+                Invoke("DoneReload", 2);
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        DoneFiring();
-        int rateOfFire = 5; // the high
-        if (!CharacterAbilites.isJackAutoActive)
+        if (!reloading)
         {
-            rateOfFire *= 3; //if Jack's ability is not active, slow down fire rate by three
-        }
+            if (!player.name.Contains("Fiona"))
+            {
+                DoneFiring();
+            }
 
-        if (Input.GetButton("Fire1")) // Hold down for automatic firing
-        {
+            int rateOfFire = 5; // the fastest you can shoot
+
+            if (!CharacterAbilites.isJackAutoActive)
+            {
+                rateOfFire *= 4; //if Jack's ability is not active, slow down fire rate by four
+            }
+            if (player.name.Contains("Fiona"))
+            {
+                rateOfFire *= 2; //if Fiona, slow fire rate by 2 times
+            }
+
             if (bulletcounter % rateOfFire == 0)
+            {
+                canShoot = true; //Controls how fast the user can shoot
+            }
+
+            if (Input.GetButton("Fire1") && canShoot && ammoInClip != 0) // Hold down for automatic firing
             {
                 Fire();
             }
             bulletcounter++;
+
+            if (ammoInClip <= maxAmmoInClip / 4)
+            {
+                LevelManager.instance.reloadPopUp.SetActive(true);
+            }
+            else
+            {
+                LevelManager.instance.reloadPopUp.SetActive(false);
+            }
         }
     }
 
@@ -81,11 +138,12 @@ public class ShootWeapon : MonoBehaviour
                     }
                 }
 
-                if (GameObject.FindGameObjectWithTag("Player").name != "Fiona")
+                if (!player.name.Contains("Fiona"))
                 {
-                    //playSound();
-                    recoilAnimation.SetInteger("firingState", 1);
+                    animState.SetInteger("firingState", 1);
+                    ammoInClip--;
                 }
+
                 // Making sure projectile goes straight.
                 Quaternion bulletOrientation = transform.rotation * Quaternion.Euler(90, 13, 0);
 
@@ -99,15 +157,21 @@ public class ShootWeapon : MonoBehaviour
 
                 projectile.transform.SetParent(GameObject.FindGameObjectWithTag("AmmoTrash").transform);
             }
-        }
+
+            canShoot = false;
+
+            ammoCount.text = ammoInClip + "/" + maxAmmoInClip;
+    }
 
     void DoneFiring()
     {
-        recoilAnimation.SetInteger("firingState", 0);
+        animState.SetInteger("firingState", 0);
     }
 
-    /*void playSound()
+    void DoneReload()
     {
-        fireSound.Play();
-    }*/
+        reloading = false;
+        ammoInClip = maxAmmoInClip;
+        ammoCount.text = (ammoInClip + "/" + maxAmmoInClip);
+    }
 }

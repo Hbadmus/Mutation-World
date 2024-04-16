@@ -25,7 +25,7 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.name == "Ace" && Input.GetKeyDown(KeyCode.Q))
+        if (gameObject.name.Contains("Ace") && Input.GetKeyDown(KeyCode.Q))
         {
             StartCoroutine(AceDamageReductionMode());
         }
@@ -40,12 +40,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int dam)
     {
-        if (gameObject.name == "Jack")
+        if (gameObject.name.Contains("Jack"))
         {
             dam /= 2;
         }
 
-        if (gameObject.name == "Ace" && isAceDamageReductionActive)
+        if (gameObject.name.Contains("Ace") && isAceDamageReductionActive)
         {
             dam /= 2;
         }

@@ -7,13 +7,14 @@ public class CharacterAbilites : MonoBehaviour
 {
     public float eagleEyeDuration = 5f;
     public float eagleEyeCool = 10f;
+    public float stormOfArrowsDuration = 5f;
     public float stormOfArrowsCooldown = 30f;
     public float stormOfArrowsRadius = 5f;
     public float stormOfArrowsDamage = 50f;
-    public float jackAutoMainDuration = 10f;
+    public float jackAutoMainDuration = 7f;
     public float jackAutoMainCool = 15f;
-    public float jackUltShrapnelDuration = 5f;
-    public float jackUltShrapnelCool = 20f;
+    public float jackUltShrapnelDuration = 7f;
+    public float jackUltShrapnelCool = 15f;
     public float aceQablity = 8f;
     public float aceQcd = 15f;
     public float aceEablity = 5f;
@@ -49,8 +50,8 @@ public class CharacterAbilites : MonoBehaviour
         
         abilityQ = GameObject.Find("Ability Canvas").transform.Find("AbilityQ").GetComponent<Image>();
         abilityE = GameObject.Find("Ability Canvas").transform.Find("AbilityE").GetComponent<Image>();
-        abilityQ.fillAmount = 0;
-        abilityE.fillAmount = 0;
+        abilityQ.fillAmount = 1;
+        abilityE.fillAmount = 1;
         
     }
 
@@ -59,35 +60,35 @@ public class CharacterAbilites : MonoBehaviour
     {
 
         updateCooldown();
-        
+
         if (gameObject.name.Contains("Fiona"))
         {
-            if (Input.GetKeyDown(KeyCode.Q) && !isEagleEyeActive)
+            if (Input.GetKeyDown(KeyCode.Q) && eagleEyeCool <= 0)
             {
                 ActivateEagleEye();
             }
-            if (Input.GetKeyDown(KeyCode.E) && !isStormOfArrowsActive)
+            if (Input.GetKeyDown(KeyCode.E) && stormOfArrowsCooldown <= 0)
             {
                 UseStormOfArrows();
             }
 
             // Cooldown timer for Q
-            if (isEagleEyeActive)
+            if (abilityQ.fillAmount > 0 || isEagleEyeActive)
             {
-                abilityQ.fillAmount -= 1 / eagleEyeDuration * Time.deltaTime;
-                if (abilityQ.fillAmount < 0)
+                abilityQ.fillAmount = eagleEyeCool / 10f;
+                if (abilityQ.fillAmount <= 0)
                 {
                     DeactivateEagleEye();
                     abilityQ.fillAmount = 0;
-                    
+
                 }
             }
 
             // Cooldown timer for E
-            if (isStormOfArrowsActive)
+            if (abilityE.fillAmount > 0 || isStormOfArrowsActive)
             {
-                abilityE.fillAmount -= 1 / stormOfArrowsCooldown * Time.deltaTime;
-                if (abilityE.fillAmount < 0)
+                abilityE.fillAmount = stormOfArrowsCooldown / 30f;
+                if (abilityE.fillAmount <= 0)
                 {
                     abilityE.fillAmount = 0;
                     isStormOfArrowsActive = false;
@@ -106,22 +107,21 @@ public class CharacterAbilites : MonoBehaviour
                 ActivateJackShrapnel();
             }
 
-            // Cooldown timer for Q
-            if (isJackAutoActive)
+            if (abilityQ.fillAmount > 0 || isJackAutoActive)
             {
-                abilityQ.fillAmount -= 1 / jackAutoMainCool * Time.deltaTime;
-                if (abilityQ.fillAmount < 0)
+                // Cooldown timer for Q
+                abilityQ.fillAmount = jackAutoMainCool / 15f;
+                if (abilityQ.fillAmount <= 0)
                 {
                     DeactivateJackAuto();
                     abilityQ.fillAmount = 0;
                 }
             }
-
-            // Cooldown timer for E
-            if (isStormOfArrowsActive)
+            if (abilityE.fillAmount > 0 || isJackShrapnelActive)
             {
-                abilityE.fillAmount -= 1 / jackUltShrapnelCool * Time.deltaTime;
-                if (abilityE.fillAmount < 0)
+                // Cooldown timer for E
+                abilityE.fillAmount = jackUltShrapnelCool / 15f;
+                if (abilityE.fillAmount <= 0)
                 {
                     abilityE.fillAmount = 0;
                     isJackShrapnelActive = false;
@@ -141,6 +141,7 @@ public class CharacterAbilites : MonoBehaviour
 
         isEagleEyeActive = true;
         abilityQ.fillAmount = 1;
+        eagleEyeCool = 10f;
         if (enemy)
         {
             enemy.GetComponent<SkinnedMeshRenderer>().material = highlightMat;
@@ -163,7 +164,14 @@ public class CharacterAbilites : MonoBehaviour
     void UseStormOfArrows()
     {
         abilityE.fillAmount = 1;
+        stormOfArrowsCooldown = 30f;
         isStormOfArrowsActive = true;
+        Invoke("DeactivateStorm", jackAutoMainDuration);
+    }
+
+    void DeactivateStorm()
+    {
+        isStormOfArrowsActive = false;
     }
 
     void ResetStormOfArrowsCooldown()
@@ -186,7 +194,7 @@ public class CharacterAbilites : MonoBehaviour
 
     void DeactivateJackAuto()
     {
-        isEagleEyeActive = false;
+        isJackAutoActive = false;
     }
 
     void ActivateJackShrapnel()
@@ -195,7 +203,7 @@ public class CharacterAbilites : MonoBehaviour
         {
             abilityE.fillAmount = 1;
             isJackShrapnelActive = true;
-            jackUltShrapnelCool = 20f;
+            jackUltShrapnelCool = 15f;
             Invoke("DeactivateJackShrapnel", jackUltShrapnelDuration);
         }
     }
@@ -207,21 +215,21 @@ public class CharacterAbilites : MonoBehaviour
 
     void updateCooldown()
     {
-        if (!isEagleEyeActive && gameObject.name == "Fiona")
+        if (!isEagleEyeActive && gameObject.name.Contains("Fiona"))
         {
-            eagleEyeCool--;
+            eagleEyeCool -= Time.deltaTime;
         }
-        if (!isStormOfArrowsActive && gameObject.name == "Fiona")
+        if (!isStormOfArrowsActive && gameObject.name.Contains("Fiona"))
         {
-            stormOfArrowsCooldown--;
+            stormOfArrowsCooldown -= Time.deltaTime;
         }
-        if (!isJackAutoActive && gameObject.name == "Jack")
+        if (!isJackAutoActive && gameObject.name.Contains("Jack"))
         {
-            jackAutoMainCool--;
+            jackAutoMainCool -= Time.deltaTime;
         }
-        if (!isJackShrapnelActive && gameObject.name == "Jack")
+        if (!isJackShrapnelActive && gameObject.name.Contains("Jack"))
         {
-            jackUltShrapnelCool--;
+            jackUltShrapnelCool -= Time.deltaTime;
         }
     }
 }

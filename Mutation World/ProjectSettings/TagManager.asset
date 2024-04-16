@@ -12,6 +12,9 @@ TagManager:
   - Throwable
   - Pickup
   - Slider
+  - Reload
+  - AmmoUI
+  - JackBullet
   layers:
   - Default
   - TransparentFX
