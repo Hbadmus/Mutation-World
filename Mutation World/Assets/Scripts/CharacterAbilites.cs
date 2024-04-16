@@ -50,8 +50,8 @@ public class CharacterAbilites : MonoBehaviour
         
         abilityQ = GameObject.Find("Ability Canvas").transform.Find("AbilityQ").GetComponent<Image>();
         abilityE = GameObject.Find("Ability Canvas").transform.Find("AbilityE").GetComponent<Image>();
-        abilityQ.fillAmount = 1;
-        abilityE.fillAmount = 1;
+        abilityQ.fillAmount = 0;
+        abilityE.fillAmount = 0;
         
     }
 
@@ -75,23 +75,22 @@ public class CharacterAbilites : MonoBehaviour
             // Cooldown timer for Q
             if (abilityQ.fillAmount > 0 || isEagleEyeActive)
             {
-                abilityQ.fillAmount = eagleEyeCool / 10f;
+                abilityQ.fillAmount -= 1 / eagleEyeCool * Time.deltaTime;
                 if (abilityQ.fillAmount <= 0)
                 {
-                    DeactivateEagleEye();
                     abilityQ.fillAmount = 0;
-
+                    DeactivateEagleEye();
                 }
             }
 
             // Cooldown timer for E
             if (abilityE.fillAmount > 0 || isStormOfArrowsActive)
             {
-                abilityE.fillAmount = stormOfArrowsCooldown / 30f;
+                abilityE.fillAmount -= 1 / stormOfArrowsCooldown * Time.deltaTime;
                 if (abilityE.fillAmount <= 0)
                 {
                     abilityE.fillAmount = 0;
-                    isStormOfArrowsActive = false;
+                    DeactivateStorm();
                 }
             }
             
@@ -110,21 +109,21 @@ public class CharacterAbilites : MonoBehaviour
             if (abilityQ.fillAmount > 0 || isJackAutoActive)
             {
                 // Cooldown timer for Q
-                abilityQ.fillAmount = jackAutoMainCool / 15f;
+                abilityQ.fillAmount -= 1 / jackAutoMainCool * Time.deltaTime;
                 if (abilityQ.fillAmount <= 0)
                 {
-                    DeactivateJackAuto();
                     abilityQ.fillAmount = 0;
+                    DeactivateJackAuto();
                 }
             }
             if (abilityE.fillAmount > 0 || isJackShrapnelActive)
             {
                 // Cooldown timer for E
-                abilityE.fillAmount = jackUltShrapnelCool / 15f;
+                abilityE.fillAmount -= 1 / jackUltShrapnelCool * Time.deltaTime;
                 if (abilityE.fillAmount <= 0)
                 {
                     abilityE.fillAmount = 0;
-                    isJackShrapnelActive = false;
+                    DeactivateJackShrapnel();
                 }
             }
         }

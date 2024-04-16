@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ShootWeapon : MonoBehaviour
@@ -29,27 +30,32 @@ public class ShootWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        if (!isInCharacterSelection())
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            ammoCount = FindAnyObjectByType<Text>();
 
-        ammoCount = FindAnyObjectByType<Text>();
+            if (player.name.Contains("Jack"))
+            {
+                speed *= 3;
+                ammoInClip = 30;
+            }
+            else if (player.name.Contains("Ace"))
+            {
+                ammoInClip = 12;
+            }
+            else // Fiona doesn't reload
+            {
+                ammoInClip = 999999999;
+                ammoCount.gameObject.SetActive(false);
+            }
+            maxAmmoInClip = ammoInClip;
 
-        if (player.name.Contains("Jack"))
-        {
-            speed *= 3;
-            ammoInClip = 30;
-        } else if (player.name.Contains("Ace"))
-        {
-            ammoInClip = 12;
-        } else // Fiona doesn't reload
-        {
-            ammoInClip = 999999999;
-            ammoCount.gameObject.SetActive(false);
+            ammoCount.text = (ammoInClip + "/" + maxAmmoInClip);
+
+            animState = GetComponentInChildren<Animator>();
         }
-        maxAmmoInClip = ammoInClip;
-
-        ammoCount.text = (ammoInClip + "/" + maxAmmoInClip);
-
-        animState = GetComponentInChildren<Animator>();
+        
     }
 
     // Update is called once per frame
@@ -74,47 +80,56 @@ public class ShootWeapon : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!reloading)
+        if (!isInCharacterSelection())
         {
-            if (!player.name.Contains("Fiona"))
+            if (!reloading)
             {
-                DoneFiring();
+                if (!player.name.Contains("Fiona"))
+                {
+                    DoneFiring();
+                }
+
+                int rateOfFire = 5; // the fastest you can shoot
+
+                if (!CharacterAbilites.isJackAutoActive)
+                {
+                    rateOfFire *= 4; //if Jack's ability is not active, slow down fire rate by four
+                }
+                if (player.name.Contains("Fiona"))
+                {
+                    rateOfFire *= 2; //if Fiona, slow fire rate by 2 times
+                }
+
+                if (bulletcounter % rateOfFire == 0)
+                {
+                    canShoot = true; //Controls how fast the user can shoot
+                }
+
+                if (Input.GetButton("Fire1") && canShoot && ammoInClip != 0) // Hold down for automatic firing
+                {
+                    Fire();
+                }
+                bulletcounter++;
+
+                if (ammoInClip <= maxAmmoInClip / 4)
+                {
+                    LevelManager.instance.reloadPopUp.SetActive(true);
+                }
+                else
+                {
+                    LevelManager.instance.reloadPopUp.SetActive(false);
+                }
             }
 
-            int rateOfFire = 5; // the fastest you can shoot
-
-            if (!CharacterAbilites.isJackAutoActive)
-            {
-                rateOfFire *= 4; //if Jack's ability is not active, slow down fire rate by four
-            }
-            if (player.name.Contains("Fiona"))
-            {
-                rateOfFire *= 2; //if Fiona, slow fire rate by 2 times
-            }
-
-            if (bulletcounter % rateOfFire == 0)
-            {
-                canShoot = true; //Controls how fast the user can shoot
-            }
-
-            if (Input.GetButton("Fire1") && canShoot && ammoInClip != 0) // Hold down for automatic firing
-            {
-                Fire();
-            }
-            bulletcounter++;
-
-            if (ammoInClip <= maxAmmoInClip / 4)
-            {
-                LevelManager.instance.reloadPopUp.SetActive(true);
-            }
-            else
-            {
-                LevelManager.instance.reloadPopUp.SetActive(false);
-            }
         }
     }
 
-        private void Fire()
+    private bool isInCharacterSelection()
+    {
+        return SceneManager.GetActiveScene().name == "CharacterSelection";
+    }
+
+    private void Fire()
         {
             if (MouseLook.enable)
             {
