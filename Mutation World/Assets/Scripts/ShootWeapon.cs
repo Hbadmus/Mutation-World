@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ShootWeapon : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class ShootWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(SceneManager.GetActiveScene().buildIndex != 0) {
         player = GameObject.FindGameObjectWithTag("Player");
 
         ammoCount = FindAnyObjectByType<Text>();
@@ -50,6 +52,7 @@ public class ShootWeapon : MonoBehaviour
         ammoCount.text = (ammoInClip + "/" + maxAmmoInClip);
 
         animState = GetComponentInChildren<Animator>();
+        }
     }
 
     // Update is called once per frame
@@ -74,6 +77,7 @@ public class ShootWeapon : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(SceneManager.GetActiveScene().buildIndex != 0) {
         if (!reloading)
         {
             if (!player.name.Contains("Fiona"))
@@ -111,6 +115,7 @@ public class ShootWeapon : MonoBehaviour
             {
                 LevelManager.instance.reloadPopUp.SetActive(false);
             }
+        }
         }
     }
 

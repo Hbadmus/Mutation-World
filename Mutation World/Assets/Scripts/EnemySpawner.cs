@@ -9,6 +9,8 @@ public class EnemySpawner : MonoBehaviour
     public GameObject boss;
     public float spawnTime1 = 3;
     public float spawnTime2 = 60;
+        public int enemy1Amt = 3;
+        public int enemy2Amt = 5;
     public int bossSpawnTime = 120;
     public float xMin = -25;
     public float xMax = 25;
@@ -20,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
     {
         InvokeRepeating("SpawnEnemy1", spawnTime1, 7);
         InvokeRepeating("SpawnEnemy2", spawnTime2, 7);
-       // Invoke("SpawnBoss", bossSpawnTime);
+       Invoke("SpawnBoss", bossSpawnTime);
     }
 
     // Update is called once per frame
@@ -31,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
 
 void SpawnEnemy1()
 {
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < enemy1Amt; i++)
     {
         Vector3 enemyPosition;
 
@@ -47,7 +49,7 @@ void SpawnEnemy1()
 
 void SpawnEnemy2()
 {
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < enemy2Amt; i++)
     {
         Vector3 enemyPosition;
 

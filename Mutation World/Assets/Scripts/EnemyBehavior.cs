@@ -12,6 +12,7 @@ public Transform player;
     float elapsedTime = 0;
     NavMeshAgent agent;
     int health;
+    static int score = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,8 @@ public Transform player;
         if (health <= 0)
         {
             Destroy(gameObject);
+            score++;
+            Debug.Log(score);
         }
 
     }
@@ -56,5 +59,15 @@ public Transform player;
         var playerHealth = player.GetComponent<PlayerHealth>();
         playerHealth.TakeDamage(damAmt);
     }
+
+    public static int GetScore() {
+    return score;
+}
+
+    public static int ResetScore() {
+    score = 0;
+    return score;
+}
+
 
 }

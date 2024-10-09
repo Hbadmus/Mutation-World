@@ -35,6 +35,7 @@ public class EnemyAI : MonoBehaviour
     bool isDead;
     ZombieAI zombieAI;
     bool hasDroppedPickup = false;
+     
 
     void Start()
     {
@@ -64,6 +65,8 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+                agent.SetDestination(player.position);
+
         health = enemyHealth.currentHealth;
         disToPlayer = Vector3.Distance(transform.position, player.transform.position);
    
@@ -135,7 +138,7 @@ public class EnemyAI : MonoBehaviour
     void UpdateAttackState()
     {
         FaceTarget(player.transform.position);
-        if (gameObject.CompareTag("Boss") && disToPlayer > Attackdistance)
+        if (gameObject.CompareTag("Boss") && disToPlayer > Attackdistance && IsPlayerInClearPOV())
         {
             GameObject attack = Instantiate(throwable,
                 spawnpoint.transform.position + transform.forward, transform.rotation) as GameObject;
@@ -179,6 +182,7 @@ void UpdateDeadState()
     zombieAI.SetZeroHealthAnimation();
     var enemyHealth = gameObject.GetComponent<EnemyHealth>();
     isDead = true;
+    
 
     if (!hasDroppedPickup) {
         enemyHealth.DropPickup();
@@ -205,7 +209,17 @@ void UpdateDeadState()
             {
 
             }
-            if (elapsedTime >= damRate && currentState == FSMStates.Attack)
+if (Attackdistance >= 20 && elapsedTime >= damRate && currentState == FSMStates.Attack && IsPlayerInClearPOV()) 
+{
+    GameObject attack = Instantiate(throwable, spawnpoint.transform.position + transform.forward, transform.rotation) as GameObject;
+    Vector3 directionToPlayer = (player.position - spawnpoint.transform.position).normalized;
+    Rigidbody rb = attack.GetComponent<Rigidbody>();
+    rb.AddForce(directionToPlayer * 100, ForceMode.VelocityChange);
+
+
+    elapsedTime = 0.0f;
+}
+            else if (Attackdistance < 20 && elapsedTime >= damRate && currentState == FSMStates.Attack)
             {
                 Invoke("DoDamage", 0.3f);
                 elapsedTime = 0.0f;
@@ -253,6 +267,8 @@ void UpdateDeadState()
     
     return false;
 }
+
+
 
 
 }

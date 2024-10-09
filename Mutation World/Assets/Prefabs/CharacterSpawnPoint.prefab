@@ -47,5 +47,4 @@ MonoBehaviour:
   characterPrefabs:
   - {fileID: 3091570012523082204, guid: 612c7643c849eb548946fafdedca4a3d, type: 3}
   - {fileID: 3896493569317531207, guid: 600c10cec3122704fbb511c03bc70d74, type: 3}
-  - {fileID: 1721163786147183941, guid: 0a462f067dbdf5d4bbd47167d1a54c81, type: 3}
   spawnPoint: {fileID: 3646981721771934970}

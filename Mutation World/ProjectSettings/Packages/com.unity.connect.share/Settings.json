@@ -4,7 +4,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"D:/Chess/Mutation-World/Mutation World/BuildJack;D:/Chess/Mutation-World/Mutation World/BuildFiona;D:/Chess/Mutation-World/Mutation World/Builds;;;;;;;\"}"
+                "value": "{\"m_Value\":\"C:/Users/badmu/Documents/GitHub/Mutation-World/New folder;C:/Users/badmu/Documents/GitHub/Mutation-World/Mutation World/Webgl;C:/Users/badmu/Documents/GitHub/Mutation-World/Mutation World/WebGL Builds;D:/Chess/Mutation-World/Mutation World/BuildJack;D:/Chess/Mutation-World/Mutation World/BuildFiona;D:/Chess/Mutation-World/Mutation World/Builds;;;;\"}"
             },
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -14,6 +14,11 @@
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "autoPublish",
+                "value": "{\"m_Value\":true}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "createDefaultBuildsFolder",
                 "value": "{\"m_Value\":true}"
             }
         ]

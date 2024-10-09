@@ -39,8 +39,13 @@ public int startHealth = 100;
 
     public void TakeDamage(int dam) {
         if(currentHealth > 0) {
+            if(gameObject.CompareTag("Boss")) {
+                currentHealth -= 2;
+            healthSlider.value = currentHealth;
+            } else {
             currentHealth -= dam;
             healthSlider.value = currentHealth;
+            }
         }
 
         Debug.Log("Current Health: " + healthSlider.value);

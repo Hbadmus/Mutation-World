@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,8 +14,15 @@ public class LevelManager : MonoBehaviour
     public AudioClip lose;
     public AudioClip win;
     public bool isGameOver;
-    public float currentTime = 0.0f; // The current time, not the time needed to win
-    public float winTime = 60f; // This should be altered for the final, but this is low for testing
+    public float currentTime = 0.0f; 
+    public float winTime = 60f; 
+     public Text killCountTxt;
+     public Text timer;
+     int killCount;
+     int sceneIndex;
+     GameObject bossObject;
+     float countdown = 300.00f;
+    
 
 
     private void Awake()
@@ -31,27 +39,86 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+        winUI.SetActive(false);
+        lossUI.SetActive(false);
+        isGameOver = false;
+        killCountTxt.gameObject.SetActive(true);
+        timer.gameObject.SetActive(true);
+        SetTimerText();
+
+        SetScoreText();
+
         if(reloadPopUp == null)
         {
             reloadPopUp = GameObject.FindGameObjectWithTag("Reload");
         }
-        winUI.SetActive(false);
-        lossUI.SetActive(false);
-        isGameOver = false;
+
+
+        
+
         
     }
 
-    void Update()
+void Update()
+{
+
+
+
+
+    if (!isGameOver)
     {
-        if(!isGameOver) {
-        currentTime += Time.deltaTime;
-        }
-        if (currentTime > winTime) 
+        sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if(sceneIndex == 2) {
+            SetScoreText();
+    }
+         bossObject = GameObject.FindWithTag("Boss");
+        if (sceneIndex == 3)
         {
-           PlayerWon();
+       if(countdown > 0) {
+        countdown -= Time.deltaTime;
+        } else {
+            countdown = 0.0f;
+
+            PlayerWon();
         }
+        SetTimerText();
+        SetScoreText();
+        }
+        else if (sceneIndex == 2)
+        {
+            SetScoreText();
+
+            if (killCount >= 50)
+            {
+                PlayerWon();
+            }
+        }
+        else if (sceneIndex == 1)
+        {
+        
+            if (bossObject != null)
+            {
+                EnemyHealth enemyHealth = bossObject.GetComponent<EnemyHealth>();
+
+                if (enemyHealth != null && enemyHealth.currentHealth <= 0)
+                {
+                    PlayerWon();
+                }
+            }
+        }
+    }
+}
 
 
+        void SetScoreText() {
+        killCount = EnemyBehavior.GetScore();
+        Debug.Log("killcount:" + killCount);
+        killCountTxt.text = "Kill Count: " + killCount.ToString();
+        Debug.Log(killCountTxt.text);
+    }
+
+        void SetTimerText() {
+        timer.text = countdown.ToString("f2");
     }
 
     public void PlayerDied()
@@ -60,6 +127,8 @@ public class LevelManager : MonoBehaviour
         lossUI.SetActive(true);
         AudioSource.PlayClipAtPoint(lose, transform.position);
         DisablePlayerAndEnemies();
+        EnemyBehavior.ResetScore();
+        Debug.Log("hi");
         Invoke("RestartGame", 2);
     }
 
@@ -72,7 +141,10 @@ public class LevelManager : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex < 3)
         {
             Invoke("NextLevel", 2);
+        } else {
+            Application.Quit();
         }
+        
     }
 
     void DisablePlayerAndEnemies()
