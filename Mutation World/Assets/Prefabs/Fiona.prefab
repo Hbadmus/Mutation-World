@@ -253,6 +253,7 @@ MonoBehaviour:
   jumpHeight: 10
   gravity: 40
   airControl: 10
+  sensitivity: 0.5
 --- !u!143 &227321381375494236
 CharacterController:
   m_ObjectHideFlags: 0
@@ -293,7 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 80
   healthSlider: {fileID: 0}
-  currentHealth: 0
+  currentHealth: 80
 --- !u!54 &6533732033028339595
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -335,6 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eagleEyeDuration: 5
   eagleEyeCool: 10
+  stormOfArrowsDuration: 5
   stormOfArrowsCooldown: 30
   stormOfArrowsRadius: 5
   stormOfArrowsDamage: 50

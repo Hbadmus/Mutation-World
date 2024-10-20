@@ -129,6 +129,7 @@ MonoBehaviour:
   jumpHeight: 10
   gravity: 50
   airControl: 10
+  sensitivity: 0.5
 --- !u!143 &3711506416108051839
 CharacterController:
   m_ObjectHideFlags: 0
@@ -167,9 +168,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c47bdbbdf6b38f4783772bb3d3881a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 150
+  startHealth: 100
   healthSlider: {fileID: 0}
-  currentHealth: 150
+  currentHealth: 100
 --- !u!54 &6827271295869773407
 Rigidbody:
   m_ObjectHideFlags: 0

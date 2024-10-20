@@ -14,12 +14,20 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject.Find("PlayerCanvas").transform.Find("HealthBar")
+    .transform.Find("Fill Area").gameObject.SetActive(true);
         currentHealth = startHealth;
         if (healthSlider == null ) 
-        {
-            healthSlider = FindObjectOfType<Slider>();
+        {   
+            healthSlider = GameObject.Find("PlayerCanvas").transform.Find("HealthBar")
+        .GetComponent<Slider>();
         }
+        if(gameObject.name.Contains("Ace")) {
         healthSlider.value = currentHealth;
+        } else {
+            healthSlider.maxValue = currentHealth;
+            healthSlider.value = currentHealth;
+        }
     }
 
     // Update is called once per frame
@@ -73,6 +81,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+
             PlayerDies();
         }
         Debug.Log("Current Health: " + currentHealth);
@@ -93,6 +102,8 @@ public class PlayerHealth : MonoBehaviour
 
     void PlayerDies()
     {
+        GameObject.Find("PlayerCanvas").transform.Find("HealthBar")
+    .transform.Find("Fill Area").gameObject.SetActive(false);
 
         transform.Rotate(-90, 0, 0, Space.Self);
         var rb = GetComponent<Rigidbody>();

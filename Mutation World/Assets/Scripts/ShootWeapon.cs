@@ -21,7 +21,6 @@ public class ShootWeapon : MonoBehaviour
     bool reloading;
     bool canShoot;
     Rigidbody rb;
-    TextMeshPro ammoUI; // tells the player how much ammo they have
 
     Color originalColor;
 
@@ -33,16 +32,18 @@ public class ShootWeapon : MonoBehaviour
         if(SceneManager.GetActiveScene().buildIndex != 0) {
         player = GameObject.FindGameObjectWithTag("Player");
 
-        ammoCount = FindAnyObjectByType<Text>();
+      //  ammoCount = GameObject.Find("Player Canvas").transform.Find("Ammo2")
+      //  .GetComponent<Text>();
+
+        ammoCount = GameObject.Find("PlayerCanvas").transform.Find("Ammo2")
+        .GetComponent<Text>();
+        Debug.Log("This is the ammocount" + ammoCount);
 
         if (player.name.Contains("Jack"))
         {
             speed *= 3;
             ammoInClip = 30;
-        } else if (player.name.Contains("Ace"))
-        {
-            ammoInClip = 12;
-        } else // Fiona doesn't reload
+        }  else // Fiona doesn't reload
         {
             ammoInClip = 999999999;
             ammoCount.gameObject.SetActive(false);
@@ -119,54 +120,62 @@ public class ShootWeapon : MonoBehaviour
         }
     }
 
-        private void Fire()
+       private void Fire()
+{
+    if (MouseLook.enable)
+    {
+        if (CharacterAbilites.isStormOfArrowsActive)
         {
-            if (MouseLook.enable)
+            Debug.Log("Storm of Arrows unleashed!");
+            int numberOfProjectiles = 20;
+            float arcAngle = 60f; // Total spread angle
+            float angleStep = arcAngle / (numberOfProjectiles - 1);
+            float startAngle = -arcAngle / 2;
+
+            for (int i = 0; i < numberOfProjectiles; i++)
             {
-                if (CharacterAbilites.isStormOfArrowsActive)
-                {
-                    Debug.Log("Storm of Arrows unleashed!");
-                    int numberOfProjectiles = 20;
-
-                    for (int i = 0; i < numberOfProjectiles; i++)
-                    {
-                        GameObject projectile = Instantiate(ammoPrefab, transform.position + transform.forward, transform.rotation) as GameObject;
-                        Rigidbody rb = projectile.GetComponent<Rigidbody>(); // Declare rb inside the loop
-
-                        rb.AddForce(transform.forward * 100, ForceMode.VelocityChange);
-                        Debug.Log("FireCount: " + fireCount);
-                    }
-                    fireCount--; // Increment fireCount after the for loop
-                    if (fireCount == 0)
-                    {
-                        CharacterAbilites.isStormOfArrowsActive = false;
-                    }
-                }
-
-                if (!player.name.Contains("Fiona"))
-                {
-                    animState.SetInteger("firingState", 1);
-                    ammoInClip--;
-                }
-
-                // Making sure projectile goes straight.
-                Quaternion bulletOrientation = transform.rotation * Quaternion.Euler(90, 13, 0);
-
-                projectile = Instantiate(ammoPrefab, transform.position +
-                transform.forward, bulletOrientation) as GameObject;
-
-
-                rb = projectile.GetComponent<Rigidbody>();
-
-                rb.AddForce(transform.forward * speed, ForceMode.VelocityChange);
-
-                projectile.transform.SetParent(GameObject.FindGameObjectWithTag("AmmoTrash").transform);
+                float currentAngle = startAngle + (angleStep * i);
+                Quaternion spreadRotation = Quaternion.Euler(0, currentAngle, 0);
+                Vector3 spreadDirection = spreadRotation * transform.forward;
+                
+                GameObject projectile = Instantiate(ammoPrefab, 
+                    transform.position + transform.forward, 
+                    transform.rotation * spreadRotation) as GameObject;
+                
+                Rigidbody rb = projectile.GetComponent<Rigidbody>();
+                rb.AddForce(spreadDirection * 100, ForceMode.VelocityChange);
             }
+            fireCount--;
+            if (fireCount == 0)
+            {
+                CharacterAbilites.isStormOfArrowsActive = false;
+            }
+        }
 
-            canShoot = false;
+        if (!player.name.Contains("Fiona"))
+        {
+            animState.SetInteger("firingState", 1);
+            ammoInClip--;
+        }
 
-            ammoCount.text = ammoInClip + "/" + maxAmmoInClip;
+        Quaternion bulletOrientation = transform.rotation * Quaternion.Euler(90, 13, 0);
+
+        projectile = Instantiate(ammoPrefab, transform.position +
+        transform.forward, bulletOrientation) as GameObject;
+
+        rb = projectile.GetComponent<Rigidbody>();
+
+        rb.AddForce(transform.forward * speed, ForceMode.VelocityChange);
+
+        projectile.transform.SetParent(GameObject.FindGameObjectWithTag("AmmoTrash").transform);
+
+        canShoot = false;
+
+        ammoCount.text = ammoInClip + "/" + maxAmmoInClip;
+
+        
     }
+}
 
     void DoneFiring()
     {
@@ -179,4 +188,6 @@ public class ShootWeapon : MonoBehaviour
         ammoInClip = maxAmmoInClip;
         ammoCount.text = (ammoInClip + "/" + maxAmmoInClip);
     }
+
+
 }

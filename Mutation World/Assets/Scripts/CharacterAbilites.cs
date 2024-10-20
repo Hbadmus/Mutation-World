@@ -23,9 +23,6 @@ public class CharacterAbilites : MonoBehaviour
     public GameObject enemy;
     public GameObject ammoPrefab;
     Rigidbody rb;
-    
-    private Material originalMat;
-    public Material highlightMat;
 
     private bool isEagleEyeReady = false;
     public static bool isEagleEyeActive = false;
@@ -42,14 +39,10 @@ public class CharacterAbilites : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        if (enemy != null)
-        {
-            originalMat = enemy.GetComponent<SkinnedMeshRenderer>().material;
-        }
         
         abilityQ = GameObject.Find("Ability Canvas").transform.Find("AbilityQ").GetComponent<Image>();
         abilityE = GameObject.Find("Ability Canvas").transform.Find("AbilityE").GetComponent<Image>();
+
         abilityQ.fillAmount = 1;
         abilityE.fillAmount = 1;
         
@@ -58,6 +51,11 @@ public class CharacterAbilites : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        GameObject.Find("Ability Canvas").transform.Find("AbilityQ")
+        .transform.Find("Q").GetComponent<Text>().text = "Q";
+        GameObject.Find("Ability Canvas").transform.Find("AbilityE")
+        .transform.Find("E").GetComponent<Text>().text = "E";
 
         updateCooldown();
 
@@ -142,10 +140,6 @@ public class CharacterAbilites : MonoBehaviour
         isEagleEyeActive = true;
         abilityQ.fillAmount = 1;
         eagleEyeCool = 10f;
-        if (enemy)
-        {
-            enemy.GetComponent<SkinnedMeshRenderer>().material = highlightMat;
-        }
 
         Invoke("DeactivateEagleEye", eagleEyeDuration);
 
@@ -154,10 +148,6 @@ public class CharacterAbilites : MonoBehaviour
     void DeactivateEagleEye()
     {
         isEagleEyeActive = false;
-        if (enemy)
-        {
-            enemy.GetComponent<SkinnedMeshRenderer>().material = originalMat;
-        }
 
     }
 

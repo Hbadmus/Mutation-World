@@ -187,9 +187,12 @@ void UpdateDeadState()
     if (!hasDroppedPickup) {
         enemyHealth.DropPickup();
         hasDroppedPickup = true; 
+        EnemySpawner.currZombieCount--;
+    Debug.Log("current count" + EnemySpawner.currZombieCount);
     }
 
     Destroy(gameObject, 2);
+
 }
 
     void FaceTarget(Vector3 target)

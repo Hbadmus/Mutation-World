@@ -17,11 +17,14 @@ public class EnemySpawner : MonoBehaviour
     public float y = 0;
     public float zMin = -25;
     public float zMax = 25;
+
+    private int maxZombies = 30;
+    public static int currZombieCount = 0;
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnEnemy1", spawnTime1, 7);
-        InvokeRepeating("SpawnEnemy2", spawnTime2, 7);
+        InvokeRepeating("SpawnEnemy1", spawnTime1, 12);
+        InvokeRepeating("SpawnEnemy2", spawnTime2, 13);
        Invoke("SpawnBoss", bossSpawnTime);
     }
 
@@ -35,6 +38,8 @@ void SpawnEnemy1()
 {
     for (int i = 0; i < enemy1Amt; i++)
     {
+        if(currZombieCount <= maxZombies) {
+
         Vector3 enemyPosition;
 
         // Generate random positions relative to the parent object
@@ -44,13 +49,18 @@ void SpawnEnemy1()
 
         GameObject spawnedEnemy = Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
         spawnedEnemy.transform.parent = transform;
+        currZombieCount++;
+        Debug.Log("current count" + currZombieCount);
+    }
     }
 }
 
 void SpawnEnemy2()
 {
+    
     for (int i = 0; i < enemy2Amt; i++)
     {
+        if(currZombieCount <= maxZombies) {
         Vector3 enemyPosition;
 
         // Generate random positions relative to the parent object
@@ -60,7 +70,11 @@ void SpawnEnemy2()
 
         GameObject spawnedEnemy = Instantiate(enemyPrefab2, enemyPosition, Quaternion.identity);
         spawnedEnemy.transform.parent = transform;
+        currZombieCount++;
+                Debug.Log("current count" + currZombieCount);
+
     }
+}
 }
 
 void SpawnBoss()

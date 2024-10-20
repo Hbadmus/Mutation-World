@@ -42,8 +42,8 @@ public class LevelManager : MonoBehaviour
         winUI.SetActive(false);
         lossUI.SetActive(false);
         isGameOver = false;
-        killCountTxt.gameObject.SetActive(true);
-        timer.gameObject.SetActive(true);
+        //killCountTxt.gameObject.SetActive(true);
+        //timer.gameObject.SetActive(true);
         SetTimerText();
 
         SetScoreText();
@@ -138,12 +138,8 @@ void Update()
         winUI.SetActive(true);
         AudioSource.PlayClipAtPoint(win, transform.position);
         DisablePlayerAndEnemies();
-        if (SceneManager.GetActiveScene().buildIndex < 3)
-        {
-            Invoke("NextLevel", 2);
-        } else {
+
             Application.Quit();
-        }
         
     }
 
@@ -168,14 +164,10 @@ void Update()
         }
     }
 
-    // Use this method to restart the game or load another scene
+    // Use this method to restart the game 
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void NextLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
 }

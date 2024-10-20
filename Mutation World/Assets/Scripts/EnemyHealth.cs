@@ -14,6 +14,7 @@ public int startHealth = 100;
     public GameObject pickupPrefab; 
     public float dropRate = 0.7f;
 
+
      void Awake() {
     healthSlider.GetComponentInChildren<Slider>();
     }
@@ -21,6 +22,7 @@ public int startHealth = 100;
     // Start is called before the first frame update
     void Start()
     {
+
         currentHealth = startHealth;
         healthSlider.value = currentHealth;
     }
@@ -31,7 +33,6 @@ public int startHealth = 100;
         healthSlider.value = Mathf.Clamp(currentHealth, 0, 100);
 
         if (healthSlider.value <= 0) {
-            DropPickup();
             healthSlider.gameObject.SetActive(false);
         }
 
@@ -70,6 +71,7 @@ public int startHealth = 100;
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Projectile")) {
             TakeDamage(damageTaken);
+
         } else if (other.CompareTag("JackBullet"))
         {
             if (CharacterAbilites.isJackShrapnelActive)
@@ -80,4 +82,5 @@ public int startHealth = 100;
             }
         }
     }
+
 }   

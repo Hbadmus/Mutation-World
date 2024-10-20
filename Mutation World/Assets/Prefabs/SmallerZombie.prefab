@@ -1355,7 +1355,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.9984713, z: 0, w: 0.055272646}
   m_LocalPosition: {x: 41.4, y: 5, z: 108.64}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7073289829664480014}
@@ -1430,8 +1430,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1.7884039
+  m_Radius: 0.7
+  m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.8998812, z: 0}
 --- !u!23 &7131552842587422828
@@ -1494,11 +1494,11 @@ MonoBehaviour:
   spawnpoint: {fileID: 0}
   player: {fileID: 0}
   damRate: 1
-  damAmt: 1
+  damAmt: 2
   timer: 1
   enemyEyes: {fileID: 5860328705260306591}
   FOV: 210
-  vicinityRadius: 60
+  vicinityRadius: 80
 --- !u!114 &7512231303593535829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1511,11 +1511,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e2221f793b0ae4db7b06f63abfc468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 50
+  startHealth: 10
   damageTaken: 10
   deathSFX: {fileID: 0}
   healthSlider: {fileID: 4451990528565315455}
-  currentHealth: 50
+  currentHealth: 10
   pickupPrefab: {fileID: 165310, guid: 4cdcc6c16809ba5439c8798d9bb925f4, type: 3}
   dropRate: 0.1
 --- !u!114 &4513803537482499490
