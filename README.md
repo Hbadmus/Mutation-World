@@ -1,20 +1,52 @@
-# Mutation World
+# Mutation World - Final Project for Game Programming Class
 
-## Introduction:
-Welcome to Mutation World, a post-apocalyptic first-person shooter (FPS) game where survival, strategy, and exploration collide in a world ravaged by mutation. Dive into the desolate landscapes, confront mutating threats, and uncover the mysteries hidden within the chaos.
+This project is a game developed as a final project for my game programming class, initially created in collaboration with a team of classmates. Since completing the class, I’ve taken on the project solo, focusing on expanding, cleaning, and polishing the game.
 
-## Game Overview:
-In Mutation World, players assume the roles of Jack, Fiona, and Ace, survivors navigating through a world overrun by zombies, monsters, ghosts, and skeletons. Each character possesses unique abilities and weapons, providing diverse gameplay experiences.
+### Overview
 
-## Objective:
-Embark on a perilous journey across five distinct maps, each presenting its own challenges and culminating in thrilling boss encounters. Players must eliminate enemies, endure hostile environments, and discover hidden treasures to progress towards the final sanctuary free from mutation.
+The game currently features one level that has undergone extensive updates to improve gameplay mechanics, visuals, and user experience. Although the game is not fully complete, the first level showcases newly implemented functionality to give a glimpse of the improvements and the direction of the project.
 
-## Game Mechanics:
-Master combat, exploration, and strategic ability usage to survive in the mutated world.
-Engage in fast-paced FPS combat against a variety of enemies with distinct attack styles and abilities.
-Collect vital pickups such as med kits, ammunition caches, and rare artifacts to enhance gameplay.
-Customize character abilities and playstyle to suit individual preferences and strategies.
-Controls:
+---
 
-## Target Audience:
-Mutation World is designed for fans of FPS games, particularly teenagers and college students who enjoy immersive survival experiences set in post-apocalyptic worlds.
+## Current Features
+
+- **Core Gameplay**: [Add brief description of the core mechanics here]
+- **Level 1**: Includes primary gameplay and showcases updated features.
+
+---
+
+## Newly Implemented Features
+
+These updates have been added to improve player experience and gameplay quality in Level 1:
+
+1. **Level Design Adjustments**: Redesigned sections of the first level for smoother pacing and increased player engagement.
+2. **Enhanced Visuals**: Added updated textures, lighting adjustments, and more visually appealing effects.
+3. **Refined Mechanics**: Improved character movement, interaction, and responsiveness for a more polished feel.
+4. **UI/UX Improvements**: [Any new HUD, menus, indicators, etc., you might have added]
+
+---
+
+## Planned Features
+
+Future development will focus on expanding gameplay and polishing the existing level. Planned features include:
+
+1. **Level Completion**: Finalize and optimize Level 1 with additional gameplay elements and fine-tuning.
+2. **Additional Levels**: Rebuild and redesign the remaining levels to offer a cohesive experience that builds on Level 1 mechanics.
+3. **New Enemies/Challenges**: Introduce varied enemies or obstacles to enhance gameplay dynamics.
+4. **Story Integration**: Add story elements, dialogue, or lore to deepen the game’s narrative.
+5. **Further Visual Enhancements**: Continue improving graphics, animations, and environmental effects to elevate the overall look and feel.
+
+---
+
+### Installation and Setup
+
+[Include instructions on how to install, set up, or play the game here.]
+
+---
+
+### Contributing
+
+If you’d like to contribute to this project, please reach out!
+
+---
+
