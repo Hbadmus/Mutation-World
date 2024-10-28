@@ -19,17 +19,17 @@ The game currently features one level that has undergone extensive updates to im
 
 These updates have been added to improve player experience and gameplay quality in Level 1:
 
--Enhanced Movement: Player movement is now faster and smoother.
--Zombie Cap: Limited to 30 zombies to reduce lag and avoid overwhelming players.
--Improved Bullet Collision: Bullets now hit only one zombie instead of passing through multiple.
--Hitbox Adjustments: Fixed small hitbox issues for zombies.
--Fiona’s/Jack's Ability Fixes:
---Main: Now fires a piercing arrow instead of marking enemies in red.
---Ultimate: Fires a wide spread of arrows.
---Passive: Increased speed for Fiona, and Jack now has damage mitigation.
--Medkit Drops: Zombies drop one medkit at random, instead of multiple.
--UI Tweaks: Adjustments to elements like zombie health bars.
--Realistic Zombie Tracking: Improved field of view and vicinity range so zombies realistically pursue players around corners.
+- Enhanced Movement: Player movement is now faster and smoother.
+- Zombie Cap: Limited to 30 zombies to reduce lag and avoid overwhelming players.
+- Improved Bullet Collision: Bullets now hit only one zombie instead of passing through multiple.
+- Hitbox Adjustments: Fixed small hitbox issues for zombies.
+- Fiona’s/Jack's Ability Fixes:
+  - Main: Now fires a piercing arrow instead of marking enemies in red.
+  - Ultimate: Fires a wide spread of arrows.
+  - Passive: Increased speed for Fiona, and Jack now has damage mitigation.
+- Medkit Drops: Zombies drop one medkit at random, instead of multiple.
+- UI Tweaks: Adjustments to elements like zombie health bars.
+- Realistic Zombie Tracking: Improved field of view and vicinity range so zombies realistically pursue players around corners.
 
 1. **Level Design Adjustments**: Redesigned sections of the first level for smoother pacing and increased player engagement.
 2. **Enhanced Visuals**: Added updated textures, lighting adjustments, and more visually appealing effects.
