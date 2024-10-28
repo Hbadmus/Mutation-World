@@ -10,7 +10,7 @@ The game currently features one level that has undergone extensive updates to im
 
 ## Current Features
 
-- **Core Gameplay**: [Add brief description of the core mechanics here]
+- **Core Gameplay**: *Mutation World* is a survival exploration game where players choose one of two unique characters, each with specialized abilities, to battle through a mutated, post-apocalyptic world. Core mechanics include combat using unique character abilities, resource management, exploration across five dangerous maps, and strategic boss fights at the end of each level. Players must balance offense, survival, and resource collection to progress through the game’s escalating challenges.
 - **Level 1**: Includes primary gameplay and showcases updated features.
 
 ---
