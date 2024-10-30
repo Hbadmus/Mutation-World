@@ -6,15 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Cover Screen.unity
+    guid: a8473077e1c527e49bd1e28c2e622230
+  - enabled: 1
     path: Assets/Scenes/CharacterSelection.unity
     guid: 851c93c4217e1504a8e01e70a900e666
   - enabled: 1
     path: Assets/Scenes/Lvl1-Zombies.unity
     guid: 1da29803bddbd604aaa9a6a259c92bc1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Lv2.unity
     guid: 535985bef0f665a4db53e7f37ef2bad4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Lv3.unity
     guid: 044571a3bfc885e499270b059bfed5f3
   m_configObjects: {}

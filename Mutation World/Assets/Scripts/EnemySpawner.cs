@@ -19,6 +19,8 @@ public class EnemySpawner : MonoBehaviour
     public float zMax = 25;
 
     private int maxZombies = 30;
+
+    public bool bossHere = false;
     public static int currZombieCount = 0;
     // Start is called before the first frame update
     void Start()
@@ -85,7 +87,12 @@ void SpawnBoss()
     {
         bossTransform.gameObject.SetActive(true);
     }
+
+    bossHere = true;
 }
 
+public bool IsBossActive() {
+   return bossHere = !bossHere;
+}
 
 }

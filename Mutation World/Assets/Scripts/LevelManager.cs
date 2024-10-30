@@ -1,3 +1,4 @@
+using System.Text;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,23 +8,18 @@ using UnityEngine.UI;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
-    
+
     public GameObject reloadPopUp; // tells the player to reload
+    public GameObject bossPopUp;
     public GameObject winUI;
     public GameObject lossUI;
     public AudioClip lose;
     public AudioClip win;
     public bool isGameOver;
-    public float currentTime = 0.0f; 
-    public float winTime = 60f; 
-     public Text killCountTxt;
-     public Text timer;
-     int killCount;
-     int sceneIndex;
-     GameObject bossObject;
-     float countdown = 300.00f;
-    
+    int sceneIndex;
+    GameObject bossObject;
 
+    float timer = 0;
 
     private void Awake()
     {
@@ -42,83 +38,48 @@ public class LevelManager : MonoBehaviour
         winUI.SetActive(false);
         lossUI.SetActive(false);
         isGameOver = false;
-        //killCountTxt.gameObject.SetActive(true);
-        //timer.gameObject.SetActive(true);
-        SetTimerText();
 
-        SetScoreText();
-
-        if(reloadPopUp == null)
+        if (reloadPopUp == null)
         {
             reloadPopUp = GameObject.FindGameObjectWithTag("Reload");
         }
 
-
-        
-
-        
+        if (bossPopUp == null)
+        {
+            bossPopUp = GameObject.FindGameObjectWithTag("BossPop");
+        }
     }
 
-void Update()
-{
-
-
-
-
-    if (!isGameOver)
+    void Update()
     {
-        sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        if(sceneIndex == 2) {
-            SetScoreText();
-    }
-         bossObject = GameObject.FindWithTag("Boss");
-        if (sceneIndex == 3)
+        if (!isGameOver)
         {
-       if(countdown > 0) {
-        countdown -= Time.deltaTime;
-        } else {
-            countdown = 0.0f;
+            sceneIndex = SceneManager.GetActiveScene().buildIndex;
+            bossObject = GameObject.FindWithTag("Boss");
 
-            PlayerWon();
-        }
-        SetTimerText();
-        SetScoreText();
-        }
-        else if (sceneIndex == 2)
-        {
-            SetScoreText();
-
-            if (killCount >= 50)
+            if (sceneIndex == 2)
             {
-                PlayerWon();
-            }
-        }
-        else if (sceneIndex == 1)
-        {
-        
-            if (bossObject != null)
-            {
-                EnemyHealth enemyHealth = bossObject.GetComponent<EnemyHealth>();
-
-                if (enemyHealth != null && enemyHealth.currentHealth <= 0)
+                if (bossObject != null)
                 {
-                    PlayerWon();
+                    timer += Time.deltaTime;
+
+                    bossPopUp.gameObject.SetActive(true);
+                    EnemyHealth enemyHealth = bossObject.GetComponent<EnemyHealth>();
+
+                    if (enemyHealth != null && enemyHealth.currentHealth <= 0)
+                    {
+                        PlayerWon();
+                    }
                 }
             }
         }
-    }
-}
 
+        if (timer > 3)
+        {
+            bossPopUp.gameObject.SetActive(false);
+        }
 
-        void SetScoreText() {
-        killCount = EnemyBehavior.GetScore();
-        Debug.Log("killcount:" + killCount);
-        killCountTxt.text = "Kill Count: " + killCount.ToString();
-        Debug.Log(killCountTxt.text);
-    }
-
-        void SetTimerText() {
-        timer.text = countdown.ToString("f2");
+        Debug.Log(timer);
     }
 
     public void PlayerDied()
@@ -129,7 +90,7 @@ void Update()
         DisablePlayerAndEnemies();
         EnemyBehavior.ResetScore();
         Debug.Log("hi");
-        Invoke("RestartGame", 2);
+        Invoke("EndGame", 2);
     }
 
     public void PlayerWon()
@@ -139,8 +100,28 @@ void Update()
         AudioSource.PlayClipAtPoint(win, transform.position);
         DisablePlayerAndEnemies();
 
-            Application.Quit();
-        
+        // Freeze the player's movement
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            // Stop the player's Rigidbody movement
+            Rigidbody playerRb = player.GetComponent<Rigidbody>();
+            if (playerRb != null)
+            {
+                playerRb.velocity = Vector3.zero; // Set velocity to zero
+                playerRb.isKinematic = true; // Make the Rigidbody kinematic to prevent further physics interactions
+            }
+
+            // Disable player movement script
+            PlayerController playerController = player.GetComponent<PlayerController>();
+            if (playerController != null)
+            {
+                playerController.enabled = false; // Disable movement controls
+            }
+        }
+
+        // Call EndGame after a delay or immediately
+        Application.Quit();
     }
 
     void DisablePlayerAndEnemies()
@@ -149,8 +130,10 @@ void Update()
         GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
         camera.GetComponent<MouseLook>().enabled = false;
         camera.GetComponent<ShootWeapon>().enabled = false; 
-        player.GetComponent<PlayerController>().enabled = false; 
-        
+        if (player != null) {
+            player.GetComponent<PlayerController>().enabled = false; 
+        }
+
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)
         {
@@ -164,10 +147,8 @@ void Update()
         }
     }
 
-    // Use this method to restart the game 
-    public void RestartGame()
+    public void EndGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Application.Quit();
     }
-
 }

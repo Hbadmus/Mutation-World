@@ -191,7 +191,7 @@ void UpdateDeadState()
     Debug.Log("current count" + EnemySpawner.currZombieCount);
     }
 
-    Destroy(gameObject, 2);
+    Destroy(gameObject, 3);
 
 }
 

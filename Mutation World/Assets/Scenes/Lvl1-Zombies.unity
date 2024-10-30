@@ -123,6 +123,85 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &16268976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 16268977}
+  - component: {fileID: 16268979}
+  - component: {fileID: 16268978}
+  m_Layer: 5
+  m_Name: BossPopUp
+  m_TagString: BossPop
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &16268977
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16268976}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 999399223}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -0.000030517578, y: -0.000091552734}
+  m_SizeDelta: {x: 220, y: 178.4}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &16268978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16268976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 5dd49b3eacc540408c98eee0de38e0f1, type: 3}
+    m_FontSize: 36
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: The Boss is Here! Take it Out To Win!
+--- !u!222 &16268979
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16268976}
+  m_CullTransparentMesh: 1
 --- !u!4 &21101581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 54a639d34870311499ec9dc5c351ede9, type: 3}
@@ -215,7 +294,7 @@ GameObject:
   - component: {fileID: 41447050}
   - component: {fileID: 41447049}
   m_Layer: 5
-  m_Name: AbilityE (1)
+  m_Name: bcktxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2911,6 +2990,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossZombie
       objectReference: {fileID: 0}
+    - target: {fileID: 8472584926009450881, guid: 70c5a29d5f709e14eb4ebab3a18f1f4a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8472584926009450881, guid: 70c5a29d5f709e14eb4ebab3a18f1f4a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8556346166732417806, guid: 70c5a29d5f709e14eb4ebab3a18f1f4a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.904995
@@ -4510,7 +4597,7 @@ GameObject:
   - component: {fileID: 968654148}
   - component: {fileID: 968654147}
   m_Layer: 5
-  m_Name: AbilityQ (1)
+  m_Name: bcktxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4805,6 +4892,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
   m_PrefabInstance: {fileID: 1716285827}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &999399223 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2692416174453013768, guid: 1fb3c0ebb24505042b4e664b0a76aba2, type: 3}
+  m_PrefabInstance: {fileID: 1153443729}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1001026676 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 0880d9ac631f24f409114af2781b3480, type: 3}
@@ -4932,6 +5024,7 @@ MonoBehaviour:
   y: 0
   zMin: -50
   zMax: 50
+  bossHere: 0
 --- !u!4 &1048246065
 Transform:
   m_ObjectHideFlags: 0
@@ -5457,7 +5550,10 @@ PrefabInstance:
     - {fileID: 1944715897829925034, guid: 1fb3c0ebb24505042b4e664b0a76aba2, type: 3}
     - {fileID: 265110743118648686, guid: 1fb3c0ebb24505042b4e664b0a76aba2, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2692416174453013768, guid: 1fb3c0ebb24505042b4e664b0a76aba2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 16268977}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3609591084530475907, guid: 1fb3c0ebb24505042b4e664b0a76aba2, type: 3}
       insertIndex: -1
@@ -7698,6 +7794,7 @@ MonoBehaviour:
   y: 0
   zMin: -50
   zMax: 50
+  bossHere: 0
 --- !u!4 &1531939987
 Transform:
   m_ObjectHideFlags: 0
@@ -9555,7 +9652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.9647059}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10614,6 +10711,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1153443730}
     - target: {fileID: 6249558329082265761, guid: ffd7ce97bf7835b4fbd2da81635eaa7d, type: 3}
+      propertyPath: bossPopUp
+      value: 
+      objectReference: {fileID: 16268976}
+    - target: {fileID: 6249558329082265761, guid: ffd7ce97bf7835b4fbd2da81635eaa7d, type: 3}
       propertyPath: reloadPopUp
       value: 
       objectReference: {fileID: 155622845}
@@ -11551,6 +11652,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3944300891881593843, guid: 0a55276d132222142b760f1bb5984b50, type: 3}
       propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8323982987694858120, guid: 0a55276d132222142b760f1bb5984b50, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:

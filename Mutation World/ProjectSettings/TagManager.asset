@@ -15,6 +15,7 @@ TagManager:
   - Reload
   - AmmoUI
   - JackBullet
+  - BossPop
   layers:
   - Default
   - TransparentFX
