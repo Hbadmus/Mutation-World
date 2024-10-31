@@ -19,22 +19,23 @@ The game currently features one level that has undergone extensive updates to im
 
 These updates have been added to improve player experience and gameplay quality in Level 1:
 
-- Enhanced Movement: Player movement is now faster and smoother.
-- Zombie Cap: Limited to 30 zombies to reduce lag and avoid overwhelming players.
-- Improved Bullet Collision: Bullets now hit only one zombie instead of passing through multiple.
-- Hitbox Adjustments: Fixed small hitbox issues for zombies.
-- Fiona’s/Jack's Ability Fixes:
-  - Main: Now fires a piercing arrow instead of marking enemies in red.
-  - Ultimate: Fires a wide spread of arrows.
-  - Passive: Increased speed for Fiona, and Jack now has damage mitigation.
-- Medkit Drops: Zombies drop one medkit at random, instead of multiple.
-- UI Tweaks: Adjustments to elements like zombie health bars.
-- Realistic Zombie Tracking: Improved field of view and vicinity range so zombies realistically pursue players around corners.
-
-1. **Level Design Adjustments**: Redesigned sections of the first level for smoother pacing and increased player engagement.
-2. **Enhanced Visuals**: Added updated textures, lighting adjustments, and more visually appealing effects.
-3. **Refined Mechanics**: Improved character movement, interaction, and responsiveness for a more polished feel.
-4. **UI/UX Improvements**: [Any new HUD, menus, indicators, etc., you might have added]
-
----
+- Enhanced player movement for increased speed and smoother control.
+- Limited zombie count to 20 to optimize performance and prevent overwhelming players.
+- Improved bullet collision: bullets now impact only one zombie rather than passing through multiple.
+- Adjusted zombie hitboxes to improve targeting accuracy.
+- Character ability updates for Fiona:
+  - Main ability now fires a piercing arrow that passes through multiple enemies.
+  - Ultimate ability launches a wide spread of arrows for crowd control.
+  - Passive ability grants increased movement speed.
+- Character ability updates for Jack:
+  - Ultimate ability now explodes on impact, dealing area damage.
+  - Passive ability now provides damage mitigation for increased survivability.
+- Modified medkit drops: zombies now drop a single medkit at random.
+- UI improvements, including zombie health bars and graying out buttons on cooldown.
+- Enhanced zombie AI for more realistic tracking and pursuit around corners.
+- Improved zombie behavior to reduce stagnation and increase movement fluidity.
+- Polished character selection screen with detailed ability descriptions and weapon visuals.
+- Added startup screen with Play, Exit, and Controls options.
+- Integrated new audio effects, including button clicks, zombie noises, and background music.
+- Added more health packs to the scene for additional player support.
 
