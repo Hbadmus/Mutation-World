@@ -18,7 +18,7 @@ public class EnemySpawner : MonoBehaviour
     public float zMin = -25;
     public float zMax = 25;
 
-    private int maxZombies = 30;
+    private int maxZombies = 20;
 
     public bool bossHere = false;
     public static int currZombieCount = 0;

@@ -402,6 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b55eda3fcb47fff42b10978d5c984285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectToDisable: {fileID: 67174141}
 --- !u!1 &137043583
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,6 +759,7 @@ GameObject:
   - component: {fileID: 545880833}
   - component: {fileID: 545880832}
   - component: {fileID: 545880831}
+  - component: {fileID: 545880834}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -841,6 +843,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 545880834}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: PlayClip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &545880832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,6 +893,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 545880829}
   m_CullTransparentMesh: 1
+--- !u!114 &545880834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545880829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b23c38971652aa41922a0dde02190b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 8300000, guid: aebae0e89d575dc43ae340319487ef87, type: 3}
 --- !u!1 &595142285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,6 +1097,7 @@ GameObject:
   - component: {fileID: 770186510}
   - component: {fileID: 770186509}
   - component: {fileID: 770186508}
+  - component: {fileID: 770186511}
   m_Layer: 5
   m_Name: Controls
   m_TagString: Untagged
@@ -1141,10 +1169,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 67174141}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 545880834}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: PlayClip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 67174143}
+        m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
+        m_MethodName: DisableAfterDelay
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1215,6 +1255,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770186506}
   m_CullTransparentMesh: 1
+--- !u!114 &770186511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770186506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b23c38971652aa41922a0dde02190b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 8300000, guid: aebae0e89d575dc43ae340319487ef87, type: 3}
 --- !u!1 &1140193466
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,6 +1330,7 @@ GameObject:
   - component: {fileID: 1209997699}
   - component: {fileID: 1209997698}
   - component: {fileID: 1209997697}
+  - component: {fileID: 1209997701}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -1372,10 +1426,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1219678948}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1219678950}
+        m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
+        m_MethodName: DisableAfterDelay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1209997701}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: PlayClip
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1422,6 +1488,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1209997695}
   m_CullTransparentMesh: 1
+--- !u!114 &1209997701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209997695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b23c38971652aa41922a0dde02190b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 8300000, guid: aebae0e89d575dc43ae340319487ef87, type: 3}
 --- !u!1 &1219678948
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,6 +1510,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1219678949}
+  - component: {fileID: 1219678950}
   m_Layer: 5
   m_Name: ControlMenu
   m_TagString: Untagged
@@ -1462,6 +1542,19 @@ RectTransform:
   m_AnchoredPosition: {x: -17.07, y: 0}
   m_SizeDelta: {x: 323.681, y: 349.023}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1219678950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219678948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b55eda3fcb47fff42b10978d5c984285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToDisable: {fileID: 1219678948}
 --- !u!1 &1367032139
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,6 +1641,7 @@ GameObject:
   - component: {fileID: 1458930108}
   - component: {fileID: 1458930107}
   - component: {fileID: 1458930106}
+  - component: {fileID: 1458930109}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1629,6 +1723,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1458930109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458930105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b594b87662164d34f85571fa1ae8e311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1516135058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1909,6 +2015,7 @@ GameObject:
   - component: {fileID: 1742336425}
   - component: {fileID: 1742336424}
   - component: {fileID: 1742336423}
+  - component: {fileID: 1742336426}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -1992,6 +2099,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1742336426}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: PlayClip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1742336424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2030,6 +2149,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742336421}
   m_CullTransparentMesh: 1
+--- !u!114 &1742336426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742336421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b23c38971652aa41922a0dde02190b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 8300000, guid: aebae0e89d575dc43ae340319487ef87, type: 3}
 --- !u!1 &1787636621
 GameObject:
   m_ObjectHideFlags: 0
@@ -2374,7 +2506,6 @@ MonoBehaviour:
   beginningAudio: {fileID: 8300000, guid: f82cc8f05a0a98e439caa7cef22abab9, type: 3}
   mainAudio: {fileID: 8300000, guid: 23ccf424c6da9674dbe2c33ea9bf044a, type: 3}
   bossAudio: {fileID: 8300000, guid: f9669b4f9437aeb4ca2d67416ee0f35d, type: 3}
-  spawner: {fileID: 0}
 --- !u!4 &2031822552
 Transform:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public int startHealth = 200;
     public Slider healthSlider;
+    public GameObject healthText;
     public int currentHealth;
     private bool isAceDamageReductionActive = false;
     private float aceDamageReductionDuration = 5f;
@@ -16,6 +17,11 @@ public class PlayerHealth : MonoBehaviour
     {
         GameObject.Find("PlayerCanvas").transform.Find("HealthBar")
     .transform.Find("Fill Area").gameObject.SetActive(true);
+
+    healthText = GameObject.Find("PlayerCanvas").transform.Find("HealthBar")
+    .transform.Find("Fill Area").Find("HealthText").gameObject;
+
+        healthText.GetComponent<Text>().text = currentHealth + "/" + startHealth;
         currentHealth = startHealth;
         if (healthSlider == null ) 
         {   
@@ -33,18 +39,9 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.name.Contains("Ace") && Input.GetKeyDown(KeyCode.Q))
-        {
-            StartCoroutine(AceDamageReductionMode());
-        }
+        healthText.GetComponent<Text>().text = currentHealth + "/" + startHealth;
     }
 
-    IEnumerator AceDamageReductionMode()
-    {
-        isAceDamageReductionActive = true;
-        yield return new WaitForSeconds(aceDamageReductionDuration);
-        isAceDamageReductionActive = false;
-    }
 
     public void TakeDamage(int dam)
     {

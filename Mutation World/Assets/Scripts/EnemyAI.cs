@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    // Enums for defining states of the enemy AI
+ // Enums for defining states of the enemy AI
     public enum FSMStates
     {
         Idle,
@@ -13,29 +15,37 @@ public class EnemyAI : MonoBehaviour
         Dead
     }
 
+    // Serialized fields for editor access
+    [Header("AI State Management")]
     public FSMStates currentState;
-    public float Attackdistance = 4;
-    public GameObject throwable;
-    public GameObject spawnpoint;
-    public Transform player;
-    public int damRate = 2;
-    public int damAmt = 10;
-    public int timer = 1;
-    public Transform enemyEyes;
-    public int FOV;
-    public int vicinityRadius;
-   
-    EnemyHealth enemyHealth; 
-    int health;
-    NavMeshAgent agent;
-    Vector3 nextDestination;
-    float disToPlayer;
-    float elapsedTime = 0;
-    bool hasAttacked;
-    bool isDead;
-    ZombieAI zombieAI;
-    bool hasDroppedPickup = false;
-     
+
+    [Header("Attack Parameters")]
+    public float AttackDistance = 4; // Distance at which the enemy can attack
+    public GameObject throwable; // The object to throw at the player
+    public GameObject spawnpoint; // Where the throwable is spawned
+
+    [Header("Player Detection")]
+    public Transform player; // Reference to the player transform
+    public int damRate = 2; // Rate at which damage is inflicted
+    public int damAmt = 10; // Amount of damage inflicted
+    public int timer = 1; // Timer for actions
+    public Transform enemyEyes; // The point from which the enemy detects the player
+    public int FOV; // Field of view for detecting the player
+    public int vicinityRadius; // Radius within which the player can be detected
+
+    // Private variables
+    private EnemyHealth enemyHealth; // Reference to enemy health component
+    private int health; // Current health of the enemy
+    private NavMeshAgent agent; // NavMesh agent for pathfinding
+    private Vector3 nextDestination; // Next destination for the enemy
+    private float disToPlayer; // Distance to the player
+    private float elapsedTime = 0; // Timer for attacks
+    private bool hasAttacked; // Track if the enemy has attacked
+    private bool isDead; // Check if the enemy is dead
+    private ZombieAI zombieAI; // Reference to the zombie AI component
+    private bool hasDroppedPickup = false; // Track if the pickup has been dropped
+
+
 
     void Start()
     {
@@ -57,6 +67,7 @@ public class EnemyAI : MonoBehaviour
         isDead = false;
 
         agent = GetComponent<NavMeshAgent>();
+        agent.isStopped = true;
         zombieAI = GetComponent<ZombieAI>();
         agent.isStopped = true;
 
@@ -70,15 +81,7 @@ public class EnemyAI : MonoBehaviour
         health = enemyHealth.currentHealth;
         disToPlayer = Vector3.Distance(transform.position, player.transform.position);
    
-     if (health <= 0)
-        {
-            if (gameObject.CompareTag("Boss"))
-            {
-                //LevelManager.instance.PlayerWon();
-            }
 
-            currentState = FSMStates.Dead;
-        }
         switch (currentState)
         {
             case FSMStates.Idle:
@@ -101,7 +104,8 @@ public class EnemyAI : MonoBehaviour
 
     void UpdateIdleState()
     {
-        if ((disToPlayer > Attackdistance && IsPlayerInClearPOV()) 
+        agent.isStopped = true;
+        if ((disToPlayer > AttackDistance && IsPlayerInClearPOV()) 
         || IsPlayerInVicinity(vicinityRadius))
         {
             zombieAI.SetIdleAnimation(false);
@@ -109,13 +113,15 @@ public class EnemyAI : MonoBehaviour
             agent.SetDestination(player.position);
             agent.isStopped = false;
             currentState = FSMStates.Chase;
+        }  else if (health <= 0) {
+            currentState = FSMStates.Dead;
         }
     }
 
     void UpdateChaseState()
     {
         FaceTarget(player.transform.position);
-        if (disToPlayer <= Attackdistance)
+        if (disToPlayer <= AttackDistance)
         {
             zombieAI.SetAttackAnimation(true);
             agent.isStopped = true;
@@ -127,18 +133,20 @@ public class EnemyAI : MonoBehaviour
             agent.isStopped = true;
             currentState = FSMStates.Idle;
         }
-        else if (timer % 10f == 0 && gameObject.CompareTag("Boss") && disToPlayer > Attackdistance)
+        else if (timer % 10f == 0 && gameObject.CompareTag("Boss") && disToPlayer > AttackDistance)
         {
             zombieAI.SetAttackAnimation(true);
             agent.isStopped = true;
             currentState = FSMStates.Attack;
+        } else if (health <= 0) {
+            currentState = FSMStates.Dead;
         }
     }
 
     void UpdateAttackState()
     {
         FaceTarget(player.transform.position);
-        if (gameObject.CompareTag("Boss") && disToPlayer > Attackdistance && IsPlayerInClearPOV())
+        if (gameObject.CompareTag("Boss") && disToPlayer > AttackDistance && IsPlayerInClearPOV())
         {
             GameObject attack = Instantiate(throwable,
                 spawnpoint.transform.position + transform.forward, transform.rotation) as GameObject;
@@ -157,7 +165,7 @@ public class EnemyAI : MonoBehaviour
 
             }
         }
-        if (disToPlayer > Attackdistance)
+        if (disToPlayer > AttackDistance)
         {
 
             zombieAI.SetMovementAnimationTrigger();
@@ -172,6 +180,8 @@ public class EnemyAI : MonoBehaviour
             zombieAI.SetIdleAnimation(true);
             agent.isStopped = true;
             currentState = FSMStates.Idle;
+        }  else if (health <= 0) {
+            currentState = FSMStates.Dead;
         }
 
         EnemyDamage();
@@ -179,6 +189,7 @@ public class EnemyAI : MonoBehaviour
 
 void UpdateDeadState()
 {
+    agent.isStopped = true;
     zombieAI.SetZeroHealthAnimation();
     var enemyHealth = gameObject.GetComponent<EnemyHealth>();
     isDead = true;
@@ -212,7 +223,7 @@ void UpdateDeadState()
             {
 
             }
-if (Attackdistance >= 20 && elapsedTime >= damRate && currentState == FSMStates.Attack && IsPlayerInClearPOV()) 
+if (AttackDistance >= 20 && elapsedTime >= damRate && currentState == FSMStates.Attack && IsPlayerInClearPOV()) 
 {
     GameObject attack = Instantiate(throwable, spawnpoint.transform.position + transform.forward, transform.rotation) as GameObject;
     Vector3 directionToPlayer = (player.position - spawnpoint.transform.position).normalized;
@@ -222,7 +233,7 @@ if (Attackdistance >= 20 && elapsedTime >= damRate && currentState == FSMStates.
 
     elapsedTime = 0.0f;
 }
-            else if (Attackdistance < 20 && elapsedTime >= damRate && currentState == FSMStates.Attack)
+            else if (AttackDistance < 20 && elapsedTime >= damRate && currentState == FSMStates.Attack)
             {
                 Invoke("DoDamage", 0.3f);
                 elapsedTime = 0.0f;

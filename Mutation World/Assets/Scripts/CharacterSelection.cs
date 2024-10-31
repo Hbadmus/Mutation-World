@@ -1,43 +1,58 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CharacterSelection : MonoBehaviour
 {
     public GameObject[] characters; // Array of character GameObjects
     public GameObject[] weapons;     // Array of weapon GameObjects
+    public Text characterNameText;   // UI Text to show the selected character's name
 
-    public int selectedCharacter = 0; // Index of the currently selected character
+    private int selectedCharacter = 0; // Index of the currently selected character
+
+    private void Start()
+    {
+        // Ensure only the first character and weapon are active at start
+        for (int i = 0; i < characters.Length; i++)
+        {
+            characters[i].SetActive(i == selectedCharacter);
+            weapons[i].SetActive(i == selectedCharacter);
+        }
+        UpdateCharacterName();
+    }
 
     public void NextCharacter()
     {
-        // Deactivate current character and its weapon
-        characters[selectedCharacter].SetActive(false);
-        weapons[selectedCharacter].SetActive(false); // Use selectedCharacter index for weapon
-
-        // Increment selected character index and loop back if needed
-        selectedCharacter = (selectedCharacter + 1) % characters.Length;
-
-        // Activate new character and its weapon
-        characters[selectedCharacter].SetActive(true);
-        weapons[selectedCharacter].SetActive(true); // Use selectedCharacter index for weapon
+        ChangeCharacter(1);
     }
 
     public void PreviousCharacter()
     {
+        ChangeCharacter(-1);
+    }
+
+    private void ChangeCharacter(int direction)
+    {
         // Deactivate current character and its weapon
         characters[selectedCharacter].SetActive(false);
-        weapons[selectedCharacter].SetActive(false); // Use selectedCharacter index for weapon
+        weapons[selectedCharacter].SetActive(false);
 
-        // Decrement selected character index and loop back if needed
-        selectedCharacter--;
-        if (selectedCharacter < 0)
-        {
-            selectedCharacter += characters.Length;
-        }
+        // Update selected character index
+        selectedCharacter = (selectedCharacter + direction + characters.Length) % characters.Length;
 
         // Activate new character and its weapon
         characters[selectedCharacter].SetActive(true);
-        weapons[selectedCharacter].SetActive(true); // Use selectedCharacter index for weapon
+        weapons[selectedCharacter].SetActive(true);
+
+        UpdateCharacterName();
+    }
+
+    private void UpdateCharacterName()
+    {
+        if (characterNameText != null)
+        {
+            characterNameText.text = characters[selectedCharacter].name; // Assuming character name is in GameObject name
+        }
     }
 
     public void StartGame()

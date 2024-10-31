@@ -1,65 +1,72 @@
 using UnityEngine;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
-    private static AudioManager instance;   // Static instance to prevent multiple instances
-    private AudioSource audioSource;        // Reference to the AudioSource component
+    private static AudioManager instance; // Static instance to ensure only one AudioManager exists across scenes
 
-    public AudioClip beginningAudio;        // Clip for the beginning audio
-    public AudioClip mainAudio;             // Clip for the main audio
-    public AudioClip bossAudio;
-    private bool isBeginningAudioPlaying = true; // Flag to check if beginning audio is playing
-    private bool isMainAudioPlaying = false;
-    public EnemySpawner spawner;
+    // Audio Source and Clips
+    private AudioSource audioSource;      // Reference to the AudioSource component
+    [Header("Audio Clips")]
+    [SerializeField] private AudioClip beginningAudio; // Clip for the beginning audio
+    [SerializeField] private AudioClip mainAudio;      // Clip for the main background audio
+    [SerializeField] private AudioClip bossAudio;      // Clip for boss battle audio
+
+    // Flags for Audio Control
+    private bool isBeginningAudioPlaying = true; // Tracks if beginning audio is currently playing
+    private bool isMainAudioPlaying = false;     // Tracks if main audio is currently playing
+
+    // Spawner Reference
+    private EnemySpawner spawner; // Reference to EnemySpawner
+
     void Awake()
     {
-        // Check if an instance of AudioManager already exists
         if (instance != null && instance != this)
         {
-            Destroy(gameObject);            // Destroy duplicate instances
+            Destroy(gameObject); // Destroy duplicate instances if one already exists
         }
         else
         {
-            instance = this;                // Set this instance as the static instance
-            DontDestroyOnLoad(gameObject);  // Keep this AudioManager across scenes
-            audioSource = GetComponent<AudioSource>(); // Get AudioSource component
+            instance = this;                // Set this instance as the main AudioManager
+            DontDestroyOnLoad(gameObject);  // Ensure persistence across scenes
 
-            // Play the beginning audio
+            audioSource = GetComponent<AudioSource>(); // Cache AudioSource component
+
+            // Begin playback with the initial audio clip
             audioSource.clip = beginningAudio;
             audioSource.Play();
         }
     }
 
-    void Start() {
-
-    }
-
     void Update()
     {
-                if (SceneManager.GetActiveScene().buildIndex == 2) {
+        // Check if in scene 2 and locate the EnemySpawner if not already assigned
+        if (SceneManager.GetActiveScene().buildIndex == 2 && spawner == null)
+        {
             GameObject spawnerObject = GameObject.Find("Spawner");
             if (spawnerObject != null)
             {
-             spawner = spawnerObject.GetComponent<EnemySpawner>(); 
+                spawner = spawnerObject.GetComponent<EnemySpawner>();
             }
         }
-        // Check if the beginning audio has finished playing
+
+        // Transition from beginning audio to main audio once the beginning audio finishes
         if (isBeginningAudioPlaying && !audioSource.isPlaying)
         {
-            // Switch to main audio
             audioSource.clip = mainAudio;
-            audioSource.loop = true;              // Enable looping for main audio
+            audioSource.loop = true;       // Enable looping for continuous main audio
             audioSource.Play();
-            isBeginningAudioPlaying = false;      // Update the flag
-            isMainAudioPlaying = true;       
-        } else if (isMainAudioPlaying && SceneManager.GetActiveScene().buildIndex == 2 && spawner.bossHere) {
+            isBeginningAudioPlaying = false;
+            isMainAudioPlaying = true;
+        }
+        // Switch to boss audio if in scene 2 and boss is present
+        else if (isMainAudioPlaying && SceneManager.GetActiveScene().buildIndex == 2 && spawner.bossHere)
+        {
             audioSource.Stop();
             audioSource.clip = bossAudio;
-            audioSource.loop = true;              // Enable looping for main audio
+            audioSource.loop = true;       // Enable looping for boss audio
             audioSource.Play();
-            isMainAudioPlaying = false;           
+            isMainAudioPlaying = false;
         }
     }
 }

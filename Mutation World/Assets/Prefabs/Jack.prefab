@@ -219,14 +219,9 @@ MonoBehaviour:
   jackAutoMainDuration: 7
   jackAutoMainCool: 15
   jackUltShrapnelDuration: 7
-  jackUltShrapnelCool: 15
-  aceQablity: 8
-  aceQcd: 15
-  aceEablity: 5
-  aceEcd: 20
+  jackUltShrapnelCool: 25
   enemy: {fileID: 0}
   ammoPrefab: {fileID: 1465959751651014018, guid: 492b86f67e435414cb0644ec6042d429, type: 3}
-  highlightMat: {fileID: 2100000, guid: cfa82f5daf8744d4aaaaa2fb5fc9d7f9, type: 2}
   abilityQ: {fileID: 0}
   abilityE: {fileID: 0}
 --- !u!1 &4188363375480569395

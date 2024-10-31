@@ -7,148 +7,128 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager instance;
+    public static LevelManager instance; // Singleton instance of LevelManager
 
-    public GameObject reloadPopUp; // tells the player to reload
-    public GameObject bossPopUp;
-    public GameObject winUI;
-    public GameObject lossUI;
-    public AudioClip lose;
-    public AudioClip win;
-    public bool isGameOver;
-    int sceneIndex;
-    GameObject bossObject;
+    [SerializeField] private GameObject bossPopUp; // Prompt for boss encounter
+    [SerializeField] private GameObject winUI; // UI displayed upon winning
+    [SerializeField] private GameObject lossUI; // UI displayed upon losing
+    [SerializeField] private AudioClip lose; // Audio clip to play on losing
+    [SerializeField] private AudioClip win; // Audio clip to play on winning
 
-    float timer = 0;
+    public bool isGameOver; // Flag to check if the game is over
+    private int sceneIndex; // Current active scene index
+    private GameObject bossObject; // Reference to the boss object
+    public GameObject reloadPopUp; // Prompt for player to reload
+
+    private float timer = 0; // Timer to control UI visibility
 
     private void Awake()
     {
+        // Singleton pattern to ensure only one instance exists
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject); // Keep this object across scene loads
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // Destroy duplicate instances
         }
     }
 
     void Start()
     {
+        // Initialize UI and game state
         winUI.SetActive(false);
         lossUI.SetActive(false);
         isGameOver = false;
 
+        // Find UI elements if not assigned in Inspector
         if (reloadPopUp == null)
-        {
             reloadPopUp = GameObject.FindGameObjectWithTag("Reload");
-        }
 
         if (bossPopUp == null)
-        {
             bossPopUp = GameObject.FindGameObjectWithTag("BossPop");
-        }
     }
 
     void Update()
     {
-        if (!isGameOver)
+        // Check if the game is over, exit if true
+        if (isGameOver) return;
+
+        // Get the current scene index
+        sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        // Find the boss object in the scene
+        bossObject = GameObject.FindWithTag("Boss");
+
+        // If in the boss battle scene
+        if (sceneIndex == 2 && bossObject != null)
         {
-            sceneIndex = SceneManager.GetActiveScene().buildIndex;
-            bossObject = GameObject.FindWithTag("Boss");
+            timer += Time.deltaTime; // Increment the timer
+            bossPopUp.SetActive(true); // Show the boss prompt
 
-            if (sceneIndex == 2)
+            // Check if the boss's health is below or equal to zero
+            EnemyHealth enemyHealth = bossObject.GetComponent<EnemyHealth>();
+            if (enemyHealth != null && enemyHealth.currentHealth <= 0)
             {
-                if (bossObject != null)
-                {
-                    timer += Time.deltaTime;
-
-                    bossPopUp.gameObject.SetActive(true);
-                    EnemyHealth enemyHealth = bossObject.GetComponent<EnemyHealth>();
-
-                    if (enemyHealth != null && enemyHealth.currentHealth <= 0)
-                    {
-                        PlayerWon();
-                    }
-                }
+                PlayerWon(); // Call win method if the boss is defeated
             }
         }
 
+        // Hide the boss prompt after 3 seconds
         if (timer > 3)
         {
-            bossPopUp.gameObject.SetActive(false);
+            bossPopUp.SetActive(false);
         }
-
-        Debug.Log(timer);
     }
 
     public void PlayerDied()
     {
-        isGameOver = true;
-        lossUI.SetActive(true);
-        AudioSource.PlayClipAtPoint(lose, transform.position);
-        DisablePlayerAndEnemies();
-        EnemyBehavior.ResetScore();
-        Debug.Log("hi");
-        Invoke("EndGame", 2);
+        // Handle player death
+        isGameOver = true; // Set game over flag
+        lossUI.SetActive(true); // Show loss UI
+        AudioSource.PlayClipAtPoint(lose, transform.position); // Play lose sound
+        DisablePlayerAndEnemies(); // Disable player and enemies
+        EnemyBehavior.ResetScore(); // Reset enemy scores
+        Invoke("MainMenu", 2); // Return to main menu after 2 seconds
     }
 
     public void PlayerWon()
     {
-        isGameOver = true;
-        winUI.SetActive(true);
-        AudioSource.PlayClipAtPoint(win, transform.position);
-        DisablePlayerAndEnemies();
+        // Handle player victory
+        isGameOver = true; // Set game over flag
+        winUI.SetActive(true); // Show win UI
+        AudioSource.PlayClipAtPoint(win, transform.position); // Play win sound
+        DisablePlayerAndEnemies(); // Disable player and enemies
 
-        // Freeze the player's movement
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            // Stop the player's Rigidbody movement
-            Rigidbody playerRb = player.GetComponent<Rigidbody>();
-            if (playerRb != null)
-            {
-                playerRb.velocity = Vector3.zero; // Set velocity to zero
-                playerRb.isKinematic = true; // Make the Rigidbody kinematic to prevent further physics interactions
-            }
-
-            // Disable player movement script
-            PlayerController playerController = player.GetComponent<PlayerController>();
-            if (playerController != null)
-            {
-                playerController.enabled = false; // Disable movement controls
-            }
-        }
-
-        // Call EndGame after a delay or immediately
-        Application.Quit();
+        Application.Quit(); // Exit the application (for builds)
     }
 
     void DisablePlayerAndEnemies()
     {
+        // Disable player and enemy components
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
-        camera.GetComponent<MouseLook>().enabled = false;
-        camera.GetComponent<ShootWeapon>().enabled = false; 
-        if (player != null) {
-            player.GetComponent<PlayerController>().enabled = false; 
+        camera.GetComponent<MouseLook>().enabled = false; // Disable camera look
+        camera.GetComponent<ShootWeapon>().enabled = false; // Disable shooting
+
+        if (player != null)
+        {
+            player.GetComponent<PlayerController>().enabled = false; // Disable player controls
         }
 
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in enemies)
-        {
+        // Disable all enemy game objects
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
             enemy.SetActive(false);
-        }
 
-        GameObject[] bosses = GameObject.FindGameObjectsWithTag("Boss");
-        foreach (GameObject boss in bosses)
-        {
+        // Disable all boss game objects
+        foreach (GameObject boss in GameObject.FindGameObjectsWithTag("Boss"))
             boss.SetActive(false);
-        }
     }
 
-    public void EndGame()
+    public void MainMenu()
     {
-        Application.Quit();
+        // Load the main menu scene
+        SceneManager.LoadScene(0);
     }
 }

@@ -2153,7 +2153,7 @@ GameObject:
   - component: {fileID: 7717968171565649829}
   m_Layer: 0
   m_Name: Jack_Bullet_Pieces
-  m_TagString: Untagged
+  m_TagString: JackBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

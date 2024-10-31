@@ -1,31 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DestroyProjectile : MonoBehaviour
 {
+    public float destroyTime = 3f; // Corrected typo
 
-    public float destoryTime = 3;
-        private Transform player;
-
-    // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-
-        Destroy(gameObject, destoryTime);
+        // Destroy the projectile after a specified time
+        Destroy(gameObject, destroyTime);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-        private void OnTriggerEnter(Collider other)
-    {
-        if(!CharacterAbilites.isEagleEyeActive ) {
-        Destroy(gameObject);  
+        // Check if the Eagle Eye ability is not active
+        if (!CharacterAbilites.isEagleEyeActive)
+        {
+            Destroy(gameObject);
         }
     }
 }
