@@ -52,6 +52,9 @@ Mutation World is an immersive first-person shooter (FPS) set in a dystopian Ear
     - Speed: High
 
   - **Zombie Boss**
+    - Health: Very High
+    - Damage: Very High
+    - Speed: Low
     - **Abilities:** Car Throw - Hurls large debris, inflicting heavy damage to any survivor unable to evade.
 
 ## Story/Narrative
