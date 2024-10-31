@@ -1,20 +1,40 @@
-# Mutation World
+# Mutation World - Final Project for Game Programming Class
 
-## Introduction:
-Welcome to Mutation World, a post-apocalyptic first-person shooter (FPS) game where survival, strategy, and exploration collide in a world ravaged by mutation. Dive into the desolate landscapes, confront mutating threats, and uncover the mysteries hidden within the chaos.
+This project is a game developed as a final project for my game programming class, initially created in collaboration with a team of classmates. Since completing the class, I’ve taken on the project solo, focusing on expanding, cleaning, and polishing the game.
 
-## Game Overview:
-In Mutation World, players assume the roles of Jack, Fiona, and Ace, survivors navigating through a world overrun by zombies, monsters, ghosts, and skeletons. Each character possesses unique abilities and weapons, providing diverse gameplay experiences.
+### Overview
 
-## Objective:
-Embark on a perilous journey across five distinct maps, each presenting its own challenges and culminating in thrilling boss encounters. Players must eliminate enemies, endure hostile environments, and discover hidden treasures to progress towards the final sanctuary free from mutation.
+The game currently features one level that has undergone extensive updates to improve gameplay mechanics, visuals, and user experience. Although the game is not fully complete, the first level showcases newly implemented functionality to give a glimpse of the improvements and the direction of the project.
 
-## Game Mechanics:
-Master combat, exploration, and strategic ability usage to survive in the mutated world.
-Engage in fast-paced FPS combat against a variety of enemies with distinct attack styles and abilities.
-Collect vital pickups such as med kits, ammunition caches, and rare artifacts to enhance gameplay.
-Customize character abilities and playstyle to suit individual preferences and strategies.
-Controls:
+---
 
-## Target Audience:
-Mutation World is designed for fans of FPS games, particularly teenagers and college students who enjoy immersive survival experiences set in post-apocalyptic worlds.
+## Current Features
+
+- **Core Gameplay**: *Mutation World* is a survival exploration game where players choose one of two unique characters, each with specialized abilities, to battle through a mutated, post-apocalyptic world. Core mechanics include combat using unique character abilities, resource management, exploration across five dangerous maps, and strategic boss fights at the end of each level. Players must balance offense, survival, and resource collection to progress through the game’s escalating challenges.
+- **Level 1**: Includes primary gameplay and showcases updated features.
+
+---
+
+## Newly Implemented Features
+
+These updates have been added to improve player experience and gameplay quality in Level 1:
+
+- Enhanced Movement: Player movement is now faster and smoother.
+- Zombie Cap: Limited to 30 zombies to reduce lag and avoid overwhelming players.
+- Improved Bullet Collision: Bullets now hit only one zombie instead of passing through multiple.
+- Hitbox Adjustments: Fixed small hitbox issues for zombies.
+- Fiona’s/Jack's Ability Fixes:
+  - Main: Now fires a piercing arrow instead of marking enemies in red.
+  - Ultimate: Fires a wide spread of arrows.
+  - Passive: Increased speed for Fiona, and Jack now has damage mitigation.
+- Medkit Drops: Zombies drop one medkit at random, instead of multiple.
+- UI Tweaks: Adjustments to elements like zombie health bars.
+- Realistic Zombie Tracking: Improved field of view and vicinity range so zombies realistically pursue players around corners.
+
+1. **Level Design Adjustments**: Redesigned sections of the first level for smoother pacing and increased player engagement.
+2. **Enhanced Visuals**: Added updated textures, lighting adjustments, and more visually appealing effects.
+3. **Refined Mechanics**: Improved character movement, interaction, and responsiveness for a more polished feel.
+4. **UI/UX Improvements**: [Any new HUD, menus, indicators, etc., you might have added]
+
+---
+
