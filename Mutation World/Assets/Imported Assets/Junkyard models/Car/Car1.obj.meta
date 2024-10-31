@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b634c5da66f8b6f438f7398d288d50cf
+guid: 3b6f5a7a1b9d5b44ba0d8136fcab450e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable:
@@ -27,12 +27,17 @@ ModelImporter:
   - first:
       95: 9500000
     second: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Car1
+    second: {fileID: 2100000, guid: 870f43dffc5cc34479b5af40c7b2cbca, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
