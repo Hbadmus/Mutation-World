@@ -96,6 +96,3 @@ Designed for FPS enthusiasts, Mutation World appeals to teenagers and college st
 
 All models, textures, and assets are sourced from the Asset Store for showcasing coding and game development skills. Original ownership and rights belong to the respective creators.
 
----
-
-Feel free to modify this template to better suit your needs. You can add specific installation instructions, contribution guidelines, or any additional sections relevant to your project.
