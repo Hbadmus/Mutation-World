@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight = 10f;
     public float gravity = 9.81f;
     public float airControl = 10f;
-    public float sensitivity = 0.5f;
+    public float sensitivity = 0.1f;
     private float speedMultiplier = 1f;
 
     CharacterController controller;

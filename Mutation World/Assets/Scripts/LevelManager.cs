@@ -90,7 +90,7 @@ public class LevelManager : MonoBehaviour
         AudioSource.PlayClipAtPoint(lose, transform.position); // Play lose sound
         DisablePlayerAndEnemies(); // Disable player and enemies
         EnemyBehavior.ResetScore(); // Reset enemy scores
-        Invoke("MainMenu", 2); // Return to main menu after 2 seconds
+        Invoke("ExitGame", 2); // Return to main menu after 2 seconds
     }
 
     public void PlayerWon()
@@ -126,9 +126,9 @@ public class LevelManager : MonoBehaviour
             boss.SetActive(false);
     }
 
-    public void MainMenu()
+    public void ExitGame()
     {
-        // Load the main menu scene
-        SceneManager.LoadScene(0);
+        
+        Application.Quit();
     }
 }
