@@ -1,6 +1,6 @@
 # Mutation World
 
-[![Build Status](https://img.shields.io/badge/build-link-blue)](your-build-link-here) 
+[![Build Status](https://img.shields.io/badge/build-link-blue)](https://play.unity.com/en/games/b2855764-2eda-48a4-9e04-fbde50358e63/mutation-world-prototype) 
 
 ## Overview
 
