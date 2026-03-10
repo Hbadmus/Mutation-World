@@ -2,96 +2,50 @@
 
 [![Build Status](https://img.shields.io/badge/build-link-blue)](https://play.unity.com/en/games/b2855764-2eda-48a4-9e04-fbde50358e63/mutation-world-prototype) 
 
+# Design Documentation
+
+**Tech:** Unity, C#  
+**Role:** Character Design, Boss Encounter Design, Playtesting and Iteration  
+**Type:** Collaborative Game Development Project
+
+---
+
 ## Overview
 
-Mutation World is an immersive first-person shooter (FPS) set in a dystopian Earth ravaged by cataclysmic mutations. Players assume the roles of Jack and Fiona, two battle-hardened survivors navigating treacherous landscapes filled with relentless zombies and mutated creatures. The game emphasizes tactical combat, resource management, and exploration in a richly developed post-apocalyptic environment.
+Mutation World is a first-person shooter set in a post-apocalyptic Earth overrun by mutations. Players choose between two survivors, Jack and Fiona, each with distinct combat styles, navigating enemy-filled environments toward a final boss encounter. My responsibility covered the character ability systems, boss encounter ruleset, and iterating on both through playtesting.
 
-## Table of Contents
+---
 
-1. [Characters](#characters)
-2. [Story/Narrative](#storynarrative)
-3. [Game World](#game-world)
-4. [Gameplay](#gameplay)
-5. [Game Mechanics](#game-mechanics)
-6. [Items, Loot, and Power-ups](#items-loot-and-power-ups)
-7. [Game Rules](#game-rules)
-8. [Target Audience](#target-audience)
-9. [Artwork/Assets](#artworkassets)
+## Character Design
 
-## Characters
+The core design challenge was making two characters feel meaningfully different without one being strictly better than the other. The goal was to create genuine playstyle choice, not just a cosmetic one.
 
-### Main Characters
+**Jack** was designed for players who want to stay in the fight aggressively. His kit rewards positioning in the middle of encounters: a passive damage resistance, a rapid-fire ability that punishes grouped enemies, and an ultimate that chains damage across targets. The design intent was that Jack players should feel comfortable standing their ground.
 
-**Jack**  
-- **Description:** A battle-hardened survivor known for his intelligence and tactical acumen. Skilled in medium-range combat, he wields a modified assault rifle with specialized ammunition, capable of inflicting devastating damage.
-- **Weapon:** Modified Assault Rifle with Versatile Ammunition Types
-- **Passive Ability:** Battle Hardened - Jack’s extensive combat experience allows him to endure greater damage, providing natural resistance against enemy attacks.
-- **Main Ability:** Auto Barrage - Jack enhances his rifle’s fire rate, unleashing a rapid burst of explosive rounds that scatter shrapnel upon impact, damaging and disorienting nearby enemies.
-- **Ultimate Ability:** Shrapnel Blast - Jack locks onto enemies and fires shots that split on impact, spreading to adjacent foes and inflicting significant damage.
+**Fiona** was designed as the counterplay option. Her increased movement speed as a passive changes how she interacts with the environment entirely, rewarding players who kite and reposition rather than tank hits. Her abilities scale with distance and line-of-sight, so good Fiona play looks completely different from good Jack play.
 
-**Fiona**  
-- **Description:** A swift and agile survivor, adept at long-range combat and known for her exceptional precision. With her bow and arrow, she takes down enemies from afar with quiet, calculated strikes.
-- **Weapon:** Bow and Arrow
-- **Passive Ability:** Fleet-footed - Fiona’s agility grants her increased movement speed, allowing her to navigate the environment and evade enemy attacks.
-- **Main Ability:** Eagle Eye - Fiona focuses her vision to execute a powerful shot that pierces multiple enemies in a line, dealing considerable damage.
-- **Ultimate Ability:** Storm of Arrows - Fiona releases a wide arc of arrows, heavily damaging all enemies within the area.
+The constraint I kept coming back to: every ability had to have a readable downside, otherwise there was no decision-making. Cooldowns and positioning requirements were the main tools used to create that tension.
 
-### Enemies
+---
 
-**Zombie Types**  
-- **Description:** Zombies in Mutation World are reanimated by the apocalyptic mutations. Mindless yet relentless, they hunt with an insatiable hunger.
+## Boss Encounter Design
 
-  - **Normal Zombie**
-    - Health: Moderate
-    - Damage: Moderate
-    - Speed: Moderate
+The Zombie Boss was designed to be a moment of escalation, not just a stat check. Key design decisions:
 
-  - **Smaller Zombie**
-    - Health: Low
-    - Damage: Low
-    - Speed: High
+**The Car Throw ability** was the centerpiece. A projectile attack with a wind-up animation gives players a readable tell to dodge, rewarding attentiveness over raw damage output. The intent was that a skilled player should be able to avoid most of the damage entirely.
 
-  - **Zombie Boss**
-    - Health: Very High
-    - Damage: Very High
-    - Speed: Low
-    - **Abilities:** Car Throw - Hurls large debris, inflicting heavy damage to any survivor unable to evade.
+**High health, low speed** was an intentional tradeoff. A slow boss that hits extremely hard creates a different kind of pressure than a fast one. Players have to respect the damage output while managing the zombies that continue spawning throughout the encounter, preventing them from just kiting indefinitely.
 
-## Story/Narrative
+The encounter was tuned so that both Jack and Fiona felt viable, just through different approaches: Jack absorbing hits and dealing sustained damage up close, Fiona maintaining distance and using her arc abilities to clear adds while chipping the boss.
 
-In Mutation World, Jack and Fiona navigate a desolate landscape transformed by cataclysmic mutations. Jack’s tactical insight and Fiona’s precision serve as vital assets as they traverse perilous terrain, from overrun cities to mutated wildernesses. Along the way, they encounter other survivors, revealing glimpses of resilience amid chaos. The true challenge lies ahead, as they push closer to the origin of the mutations, reaching a final sanctuary that promises a future free from devastation.
+---
 
-## Game World
+## Playtesting and Iteration
 
-Mutation World unfolds on a dystopian Earth, where each area reveals the devastation wrought by rampant mutations. Players must navigate dense jungles and the silent, deadly streets of city ruins, scavenging for survival amid mutated predators and undead foes.
+Several design issues surfaced through playtesting that changed the final ruleset:
 
-## Gameplay
+- **Boss felt unkillable early on.** Initial health values were too high relative to player damage output, making the encounter feel like a grind rather than a climax. Tuned health down and increased ability damage to keep the pacing tight.
+- **Fiona felt underpowered in close quarters.** Early playtesters defaulted to Jack because enclosed spaces neutralized Fiona's range advantage. Added wider corridors in the boss arena to give her kit room to breathe.
+- **Ability cooldowns were too punishing.** First iteration had long cooldowns that made abilities feel unreliable. Shortened them based on feedback that players wanted to feel powerful, not constrained.
 
-Mutation World offers a dynamic experience where players balance strategic ability use with high-paced combat. Challenges include defeating enemies and surviving hostile environments, with choices in playstyle, from devastating attacks to stealth tactics.
-
-## Game Mechanics
-
-- **Ability Usage:** Unique character abilities with cooldowns allow for powerful attacks or utility actions.
-- **Health Management:** Players must locate med kits to recover health during or after combat.
-- **Combat Dynamics:** Players face various zombie types, requiring adaptive strategies in real-time.
-- **Exploration Rewards:** Exploration encourages finding hidden loot and power-ups.
-- **Progression System:** Players earn points for defeating enemies to upgrade characters and abilities.
-
-## Items, Loot, and Power-ups
-
-Players enhance their survival chances through strategically located items:
-- **Med Kits:** Restore health during combat.
-- **Ability Loadouts:** Choose characters whose abilities align with preferred strategies.
-
-## Game Rules
-
-- **Survival Objective:** Navigate maps while facing enemies and environmental obstacles.
-- **Final Victory:** Defeat the boss and reach the sanctuary map free from mutation to secure survival.
-
-## Target Audience
-
-Designed for FPS enthusiasts, Mutation World appeals to teenagers and college students who enjoy survival, strategy, and exploration in a post-apocalyptic setting.
-
-## Artwork/Assets
-
-All models, textures, and assets are sourced from the Asset Store for showcasing coding and game development skills. Original ownership and rights belong to the respective creators.
+Every change came from watching real players, not assumptions about how they would play.All models, textures, and assets are sourced from the Asset Store for showcasing coding and game development skills. Original ownership and rights belong to the respective creators.
